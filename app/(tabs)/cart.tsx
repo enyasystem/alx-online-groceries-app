@@ -1,16 +1,21 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import {
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  Modal,
+  Pressable,
 } from "react-native";
+import CheckoutCard from "../../src/components/CheckoutCard";
 import { useCart } from "../../src/context/CartContext";
 
 export default function Cart() {
   const router = useRouter();
+  const [showCheckout, setShowCheckout] = useState(false);
   const { items, removeItem, updateQuantity, getTotalPrice } = useCart();
 
   const subtotal = getTotalPrice();
@@ -296,7 +301,7 @@ export default function Cart() {
           </Text>
         </View>
         <TouchableOpacity
-          onPress={() => router.push({ pathname: "/checkout" })}
+          onPress={() => setShowCheckout(true)}
           style={{
             backgroundColor: "#53B175",
             paddingVertical: 16,
@@ -315,6 +320,24 @@ export default function Cart() {
           </Text>
         </TouchableOpacity>
       </View>
+      
+      {/* Checkout Modal */}
+      <Modal
+        visible={showCheckout}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowCheckout(false)}
+      >
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.35)" }}>
+          <Pressable
+            style={{ flex: 1 }}
+            onPress={() => setShowCheckout(false)}
+          />
+          <View style={{ justifyContent: "flex-end" }}>
+            <CheckoutCard />
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
