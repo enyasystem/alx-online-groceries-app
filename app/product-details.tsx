@@ -9,11 +9,17 @@ import {
     View,
 } from "react-native";
 import { useCart } from "../src/context/CartContext";
+import { useFavorites } from "../src/context/FavoritesContext";
 
 export default function ProductDetails() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const { addItem } = useCart();
+  const {
+    addFavorite,
+    removeFavorite,
+    isFavorite: checkIsFavorite,
+  } = useFavorites();
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -93,7 +99,23 @@ export default function ProductDetails() {
           <Text style={{ fontSize: 18, fontWeight: "700", color: "#181725" }}>
             Product Details
           </Text>
-          <TouchableOpacity onPress={() => setIsFavorite(!isFavorite)}>
+          <TouchableOpacity
+            onPress={() => {
+              const newFavoriteState = !isFavorite;
+              setIsFavorite(newFavoriteState);
+              if (newFavoriteState) {
+                addFavorite({
+                  id: product.id,
+                  name: product.name,
+                  description: product.weight,
+                  price: product.price,
+                  image: product.icon,
+                });
+              } else {
+                removeFavorite(product.id);
+              }
+            }}
+          >
             <MaterialIcons
               name={isFavorite ? "favorite" : "favorite-outline"}
               size={28}

@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import FavoriteBadge from "../src/components/FavoriteBadge";
 import FiltersModal from "../src/components/FiltersModal";
 import { useAuth } from "../src/context/AuthContext";
 
@@ -176,103 +177,118 @@ export default function SearchScreen() {
   }, [searchQuery, activeFilters]);
 
   const renderProductCard = ({ item }: { item: (typeof allProducts)[0] }) => (
-    <TouchableOpacity
-      onPress={() =>
-        router.push({
-          pathname: "/product-details",
-          params: {
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            icon: item.icon,
-            details: item.details,
-          },
-        })
-      }
+    <View
       style={{
-        backgroundColor: "#fff",
-        borderRadius: 12,
-        padding: 12,
+        position: "relative",
         marginBottom: 12,
         width: cardWidth,
-        borderWidth: 1,
-        borderColor: "#F0F0F0",
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.08,
-        shadowRadius: 8,
-        elevation: 3,
       }}
     >
-      <View
+      <TouchableOpacity
+        onPress={() =>
+          router.push({
+            pathname: "/product-details",
+            params: {
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              icon: item.icon,
+              details: item.details,
+            },
+          })
+        }
         style={{
-          backgroundColor: "#F7F7F7",
+          backgroundColor: "#fff",
           borderRadius: 12,
           padding: 12,
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: 100,
-          marginBottom: 8,
+          borderWidth: 1,
+          borderColor: "#F0F0F0",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.08,
+          shadowRadius: 8,
+          elevation: 3,
         }}
       >
-        <Text style={{ fontSize: 48 }}>{item.icon}</Text>
-      </View>
-
-      <Text
-        style={{
-          fontSize: 13,
-          fontWeight: "600",
-          color: "#181725",
-          marginBottom: 4,
-        }}
-        numberOfLines={1}
-      >
-        {item.name}
-      </Text>
-
-      <Text
-        style={{
-          fontSize: 11,
-          color: "#7C7C7C",
-          marginBottom: 8,
-        }}
-        numberOfLines={1}
-      >
-        {item.details}
-      </Text>
-
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Text
+        <View
           style={{
-            fontSize: 14,
-            fontWeight: "700",
-            color: "#53B175",
-          }}
-        >
-          {item.price}
-        </Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#53B175",
-            width: 28,
-            height: 28,
-            borderRadius: 8,
+            backgroundColor: "#F7F7F7",
+            borderRadius: 12,
+            padding: 12,
             alignItems: "center",
             justifyContent: "center",
+            minHeight: 100,
+            marginBottom: 8,
           }}
         >
-          <Text style={{ fontSize: 14, color: "#fff", fontWeight: "700" }}>
-            +
+          <Text style={{ fontSize: 48 }}>{item.icon}</Text>
+        </View>
+
+        <Text
+          style={{
+            fontSize: 13,
+            fontWeight: "600",
+            color: "#181725",
+            marginBottom: 4,
+          }}
+          numberOfLines={1}
+        >
+          {item.name}
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 11,
+            color: "#7C7C7C",
+            marginBottom: 8,
+          }}
+          numberOfLines={1}
+        >
+          {item.details}
+        </Text>
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: "700",
+              color: "#53B175",
+            }}
+          >
+            {item.price}
           </Text>
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#53B175",
+              width: 28,
+              height: 28,
+              borderRadius: 8,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 14, color: "#fff", fontWeight: "700" }}>
+              +
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+
+      {/* Favorite Badge - Outside TouchableOpacity for proper z-index */}
+      <FavoriteBadge
+        productId={item.id}
+        productName={item.name}
+        productDescription={item.details}
+        productPrice={parseInt(item.price as any) || 0}
+        productImage={item.icon}
+      />
+    </View>
   );
 
   return (
