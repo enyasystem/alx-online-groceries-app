@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, ViewStyle, TextStyle } from "react-native";
+import { Text, TextStyle, TouchableOpacity, ViewStyle } from "react-native";
 
 interface ButtonProps {
   label: string;
