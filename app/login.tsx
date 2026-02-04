@@ -191,7 +191,7 @@ export default function Login() {
               color: "#7C7C7C",
             }}
           >
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
           </Text>
           <TouchableOpacity onPress={() => router.push("/signup")}>
             <Text

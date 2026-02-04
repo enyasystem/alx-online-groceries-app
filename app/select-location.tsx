@@ -130,7 +130,7 @@ export default function SelectLocation() {
               lineHeight: 21,
             }}
           >
-            Switch on your location to stay in tune with{"\n"}what's happening
+            Switch on your location to stay in tune with{"\n"}what&apos;s happening
             in your area
           </Text>
 
