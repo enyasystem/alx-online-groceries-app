@@ -120,7 +120,7 @@ export default function VerifyOTP() {
                     letterSpacing: 12,
                   }}
                 >
-                  {code[index] ? code[index] : "|"}
+                  {code[index] || "-"}
                 </Text>
               </View>
             ))}
