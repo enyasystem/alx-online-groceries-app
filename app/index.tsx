@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { View, Text, Animated, SafeAreaView } from "react-native";
+import { Animated, SafeAreaView, Text, View } from "react-native";
 
 export default function SplashScreen() {
   const router = useRouter();

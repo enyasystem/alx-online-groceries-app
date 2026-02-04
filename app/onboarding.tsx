@@ -11,7 +11,7 @@ export default function Onboarding() {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/(tabs)/index");
+    router.push("/signin");
   };
 
   return (
