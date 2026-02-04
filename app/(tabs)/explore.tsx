@@ -2,13 +2,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
+import FavoriteBadge from "../../src/components/FavoriteBadge";
 
 export default function Explore() {
   const router = useRouter();
@@ -200,9 +201,10 @@ export default function Explore() {
                         shadowOpacity: 0.2,
                         shadowRadius: 12,
                         elevation: 8,
+                        position: "relative",
                       }}
                     >
-                      {/* Featured Badge */}
+                      {/* Trending Badge */}
                       <View
                         style={{
                           position: "absolute",
@@ -224,6 +226,17 @@ export default function Explore() {
                         >
                           TRENDING
                         </Text>
+                      </View>
+
+                      {/* Favorite Badge (inside card) */}
+                      <View style={{ position: "absolute", top: 12, left: 12 }}>
+                        <FavoriteBadge
+                          productId={category.id}
+                          productName={category.name}
+                          productDescription={`${category.productCount} items`}
+                          productPrice={0}
+                          productImage={category.icon}
+                        />
                       </View>
 
                       {/* Icon */}

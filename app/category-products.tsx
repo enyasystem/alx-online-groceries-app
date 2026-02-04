@@ -8,6 +8,7 @@ import {
     View,
 } from "react-native";
 import FavoriteBadge from "../src/components/FavoriteBadge";
+import AddButton from "./(components)/AddButton";
 
 export default function CategoryProducts() {
   const router = useRouter();
@@ -342,6 +343,7 @@ export default function CategoryProducts() {
         weight: product.size,
         icon: product.image,
         details: `${product.name} - ${product.size}`,
+        category: categoryName,
       },
     });
   };
@@ -510,26 +512,7 @@ export default function CategoryProducts() {
                         </View>
 
                         {/* Add Button */}
-                        <TouchableOpacity
-                          style={{
-                            backgroundColor: "#53B175",
-                            width: 32,
-                            height: 32,
-                            borderRadius: 10,
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Text
-                            style={{
-                              fontSize: 18,
-                              color: "#fff",
-                              fontWeight: "600",
-                            }}
-                          >
-                            +
-                          </Text>
-                        </TouchableOpacity>
+                        <AddButton product={product} category={categoryName} />
                       </View>
                     </View>
                   </View>

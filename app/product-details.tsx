@@ -8,9 +8,9 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import FavoriteBadge from "../src/components/FavoriteBadge";
 import { useCart } from "../src/context/CartContext";
 import { useFavorites } from "../src/context/FavoritesContext";
-import FavoriteBadge from "../src/components/FavoriteBadge";
 
 export default function ProductDetails() {
   const router = useRouter();
@@ -52,8 +52,16 @@ export default function ProductDetails() {
   ];
 
   const handleAddToCart = () => {
+    const parsedId = parseInt(getParam(params.id));
+    const categoryParam = getParam(params.category);
+    const itemId = categoryParam
+      ? `${categoryParam}-${parsedId || Date.now()}`
+      : isNaN(parsedId)
+        ? Date.now()
+        : parsedId;
+
     addItem({
-      id: parseInt(getParam(params.id)) || 1,
+      id: itemId,
       name: getParam(params.name) || product.name,
       description: getParam(params.weight) || product.weight,
       price: product.price,
@@ -129,7 +137,9 @@ export default function ProductDetails() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: "100%", position: "relative", marginBottom: 16 }}>
+          <View
+            style={{ width: "100%", position: "relative", marginBottom: 16 }}
+          >
             <View
               style={{
                 width: "100%",

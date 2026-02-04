@@ -207,9 +207,8 @@ export default function Signup() {
             </Text>{" "}
             and{" "}
             <Text style={{ color: "#53B175", fontWeight: "600" }}>
-              Privacy Policy
+              Privacy Policy.
             </Text>
-            .
           </Text>
         </View>
 
