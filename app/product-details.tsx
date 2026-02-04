@@ -76,7 +76,28 @@ export default function ProductDetails() {
   };
 
   const incrementQuantity = () => {
-    if (quantity < product.quantity) setQuantity(quantity + 1);
+    if (quantity < product.quantity) {
+      const newQty = quantity + 1;
+      setQuantity(newQty);
+
+      // Add a single unit to cart when plus is pressed on details page
+      const parsedId = parseInt(getParam(params.id));
+      const categoryParam = getParam(params.category);
+      const itemId = categoryParam
+        ? `${categoryParam}-${parsedId || Date.now()}`
+        : isNaN(parsedId)
+          ? Date.now()
+          : parsedId;
+
+      addItem({
+        id: itemId,
+        name: getParam(params.name) || product.name,
+        description: getParam(params.weight) || product.weight,
+        price: product.price,
+        icon: getParam(params.icon) || product.icon,
+        quantity: 1,
+      });
+    }
   };
 
   return (
