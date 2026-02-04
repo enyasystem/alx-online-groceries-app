@@ -34,12 +34,12 @@ export default function SignIn() {
 
   const handleGoogleSignIn = () => {
     // Handle Google sign in
-    router.push("/(tabs)/index");
+    router.push("/verify-phone");
   };
 
   const handleFacebookSignIn = () => {
     // Handle Facebook sign in
-    router.push("/(tabs)/index");
+    router.push("/verify-phone");
   };
 
   const handleSelectCountry = (country: (typeof COUNTRIES)[0]) => {
@@ -131,20 +131,23 @@ export default function SignIn() {
               />
             </TouchableOpacity>
 
-            {/* Phone Input */}
-            <TextInput
-              placeholder="Enter phone number"
-              placeholderTextColor="#CCCCCC"
-              keyboardType="phone-pad"
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
+            {/* Phone Input - Clickable */}
+            <TouchableOpacity
+              onPress={() => router.push("/verify-phone")}
               style={{
                 flex: 1,
-                fontSize: 16,
-                color: "#181725",
                 paddingVertical: 12,
               }}
-            />
+            >
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: "#CCCCCC",
+                }}
+              >
+                Enter phone number
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
 
