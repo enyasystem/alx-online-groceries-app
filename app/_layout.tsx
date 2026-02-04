@@ -2,6 +2,7 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { AuthProvider, useAuth } from "../src/context/AuthContext";
 import { CartProvider } from "../src/context/CartContext";
+import { FavoritesProvider } from "../src/context/FavoritesContext";
 
 function RootLayoutNav() {
   const { isSignedIn, isLoading } = useAuth();
@@ -56,7 +57,9 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <CartProvider>
-        <RootLayoutNav />
+        <FavoritesProvider>
+          <RootLayoutNav />
+        </FavoritesProvider>
       </CartProvider>
     </AuthProvider>
   );
