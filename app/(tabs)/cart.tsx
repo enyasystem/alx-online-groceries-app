@@ -61,7 +61,7 @@ export default function Cart() {
   };
 
   const subtotal = getTotalPrice();
-  const delivery = 2.0;
+  const delivery = 7000.0;
   const total = subtotal + delivery;
 
   if (items.length === 0) {
