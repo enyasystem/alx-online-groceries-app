@@ -87,9 +87,8 @@ export default function Explore() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: 100,
-          paddingHorizontal: 20,
-          paddingVertical: 24,
-          paddingTop: 32,
+          paddingVertical: 0,
+          paddingTop: 0,
         }}
       >
         {/* Header */}
