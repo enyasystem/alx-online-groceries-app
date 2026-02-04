@@ -42,7 +42,7 @@ export default function TabsLayout() {
           ),
           tabBarLabelStyle: {
             fontSize: 10,
-            fontWeight: "500",
+            fontWeight: "700",
             marginTop: 2,
           },
         }}
@@ -57,7 +57,7 @@ export default function TabsLayout() {
           ),
           tabBarLabelStyle: {
             fontSize: 10,
-            fontWeight: "500",
+            fontWeight: "700",
             marginTop: 2,
           },
         }}
@@ -73,7 +73,7 @@ export default function TabsLayout() {
             <View
               style={{
                 position: "absolute",
-                bottom: 18,
+                bottom: 4,
                 width: 68,
                 height: 68,
                 borderRadius: 34,
@@ -82,10 +82,10 @@ export default function TabsLayout() {
                 borderColor: "#B8E6C9",
                 justifyContent: "center",
                 alignItems: "center",
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 10 },
-                shadowOpacity: 0.35,
-                shadowRadius: 14,
+                // shadowColor: "#498a7a",
+                // shadowOffset: { width: 0, height: 10 },
+                // shadowOpacity: 0.35,
+                // shadowRadius: 14,
                 elevation: 18,
               }}
             >
@@ -121,7 +121,7 @@ export default function TabsLayout() {
           ),
           tabBarLabelStyle: {
             fontSize: 10,
-            fontWeight: "500",
+            fontWeight: "700",
             marginTop: 2,
           },
         }}
@@ -136,7 +136,7 @@ export default function TabsLayout() {
           ),
           tabBarLabelStyle: {
             fontSize: 10,
-            fontWeight: "500",
+            fontWeight: "700",
             marginTop: 2,
           },
         }}
