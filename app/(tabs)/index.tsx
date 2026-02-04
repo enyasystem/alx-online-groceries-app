@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useRef, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -12,6 +13,8 @@ import { useAuth } from "../../src/context/AuthContext";
 export default function Home() {
   const router = useRouter();
   const { user } = useAuth();
+  const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
+  const carouselRef = useRef(null);
   const categories = [
     { id: 1, name: "Vegetables", icon: "🥬", color: "#E8F5E9" },
     { id: 2, name: "Fruits", icon: "🍎", color: "#FCE4EC" },
@@ -231,7 +234,7 @@ export default function Home() {
           </ScrollView>
         </View>
 
-        {/* Exclusive Offers Section */}
+        {/* Exclusive Offers Section - Carousel */}
         <View style={{ paddingHorizontal: 20, marginBottom: 24 }}>
           <View
             style={{
@@ -252,14 +255,21 @@ export default function Home() {
             </TouchableOpacity>
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
+          <ScrollView
+            ref={carouselRef}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            onMomentumScrollEnd={(event) => {
+              const index = Math.round(
+                event.nativeEvent.contentOffset.x / (400 + 12)
+              );
+              setCurrentOfferIndex(index % exclusiveOffers.length);
             }}
+            style={{ marginHorizontal: -20 }}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
           >
-            {exclusiveOffers.slice(0, 2).map((offer) => (
+            {exclusiveOffers.map((offer) => (
               <TouchableOpacity
                 key={offer.id}
                 onPress={() =>
@@ -276,37 +286,93 @@ export default function Home() {
                 }
                 style={{
                   backgroundColor: offer.bgColor,
-                  borderRadius: 16,
-                  padding: 16,
-                  width: "48%",
-                  marginBottom: 12,
-                  alignItems: "center",
+                  borderRadius: 20,
+                  padding: 20,
+                  width: 380,
+                  marginRight: 12,
+                  justifyContent: "space-between",
+                  height: 200,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 12,
+                  elevation: 5,
                 }}
               >
-                <Text style={{ fontSize: 48, marginBottom: 8 }}>
-                  {offer.icon}
-                </Text>
-                <Text
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: "700",
+                      color: "#53B175",
+                      backgroundColor: "rgba(83, 177, 117, 0.15)",
+                      paddingHorizontal: 12,
+                      paddingVertical: 4,
+                      borderRadius: 20,
+                      alignSelf: "flex-start",
+                      marginBottom: 12,
+                    }}
+                  >
+                    Exclusive
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "700",
+                      color: "#181725",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {offer.name}
+                  </Text>
+                  <Text
+                    style={{ fontSize: 13, color: "#7C7C7C", marginBottom: 4 }}
+                  >
+                    {offer.details}
+                  </Text>
+                </View>
+                <View
                   style={{
-                    fontSize: 14,
-                    fontWeight: "600",
-                    color: "#181725",
-                    marginBottom: 4,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
                   }}
                 >
-                  {offer.name}
-                </Text>
-                <Text
-                  style={{ fontSize: 12, color: "#7C7C7C", marginBottom: 8 }}
-                >
-                  {offer.details}
-                </Text>
-                <Text
-                  style={{ fontSize: 16, fontWeight: "700", color: "#53B175" }}
-                >
-                  {offer.price}
-                </Text>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontWeight: "700",
+                      color: "#53B175",
+                    }}
+                  >
+                    {offer.price}
+                  </Text>
+                  <Text style={{ fontSize: 60 }}>{offer.icon}</Text>
+                </View>
               </TouchableOpacity>
+            ))}
+          </ScrollView>
+
+          {/* Carousel Indicators */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: 16,
+            }}
+          >
+            {exclusiveOffers.map((_, index) => (
+              <View
+                key={index}
+                style={{
+                  width: currentOfferIndex === index ? 28 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  backgroundColor:
+                    currentOfferIndex === index ? "#53B175" : "#E2E2E2",
+                  marginHorizontal: 4,
+                }}
+              />
             ))}
           </View>
         </View>
