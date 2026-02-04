@@ -86,7 +86,7 @@ export default function Cart() {
           >
             <Text style={{ fontSize: 16, color: "#7C7C7C" }}>Subtotal</Text>
             <Text style={{ fontSize: 16, fontWeight: "600", color: "#181725" }}>
-              $0.00
+              ₦{(0).toLocaleString()}
             </Text>
           </View>
           <View
@@ -98,7 +98,7 @@ export default function Cart() {
           >
             <Text style={{ fontSize: 16, color: "#7C7C7C" }}>Delivery</Text>
             <Text style={{ fontSize: 16, fontWeight: "600", color: "#181725" }}>
-              $2.00
+              ₦{delivery.toLocaleString()}
             </Text>
           </View>
           <TouchableOpacity
@@ -240,7 +240,7 @@ export default function Cart() {
                     color: "#181725",
                   }}
                 >
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ₦{(item.price * item.quantity).toLocaleString()}
                 </Text>
               </View>
 
@@ -280,7 +280,7 @@ export default function Cart() {
         >
           <Text style={{ fontSize: 16, color: "#7C7C7C" }}>Subtotal</Text>
           <Text style={{ fontSize: 16, fontWeight: "600", color: "#181725" }}>
-            ${subtotal.toFixed(2)}
+            ₦{subtotal.toLocaleString()}
           </Text>
         </View>
         <View
@@ -292,7 +292,7 @@ export default function Cart() {
         >
           <Text style={{ fontSize: 16, color: "#7C7C7C" }}>Delivery</Text>
           <Text style={{ fontSize: 16, fontWeight: "600", color: "#181725" }}>
-            ${delivery.toFixed(2)}
+            ₦{delivery.toLocaleString()}
           </Text>
         </View>
         <TouchableOpacity
@@ -310,7 +310,7 @@ export default function Cart() {
             Go to Checkout
           </Text>
           <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-            ${total.toFixed(2)}
+            ₦{total.toLocaleString()}
           </Text>
         </TouchableOpacity>
       </View>
