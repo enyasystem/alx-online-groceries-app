@@ -2,13 +2,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-  Modal,
-  Pressable,
+    Modal,
+    Pressable,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import CheckoutCard from "../../src/components/CheckoutCard";
 import { useCart } from "../../src/context/CartContext";
@@ -320,7 +320,7 @@ export default function Cart() {
           </Text>
         </TouchableOpacity>
       </View>
-      
+
       {/* Checkout Modal */}
       <Modal
         visible={showCheckout}
@@ -334,7 +334,7 @@ export default function Cart() {
             onPress={() => setShowCheckout(false)}
           />
           <View style={{ justifyContent: "flex-end" }}>
-            <CheckoutCard />
+            <CheckoutCard onClose={() => setShowCheckout(false)} />
           </View>
         </View>
       </Modal>
