@@ -32,13 +32,6 @@ export default function SignIn() {
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [showCountryModal, setShowCountryModal] = useState(false);
 
-  const handleContinuePhone = () => {
-    if (phoneNumber.trim()) {
-      // Navigate to verification screen
-      router.push("/(tabs)/index");
-    }
-  };
-
   const handleGoogleSignIn = () => {
     // Handle Google sign in
     router.push("/(tabs)/index");
@@ -217,21 +210,6 @@ export default function SignIn() {
           >
             Continue with Facebook
           </Text>
-        </TouchableOpacity>
-
-        {/* Continue Button */}
-        <TouchableOpacity
-          onPress={handleContinuePhone}
-          disabled={!phoneNumber.trim()}
-          style={{
-            backgroundColor: phoneNumber.trim() ? "#53B175" : "#E8E8E8",
-            paddingVertical: 16,
-            borderRadius: 28,
-            alignItems: "center",
-            marginBottom: 24,
-          }}
-        >
-         
         </TouchableOpacity>
       </ScrollView>
 
