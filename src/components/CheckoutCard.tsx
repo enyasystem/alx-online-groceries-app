@@ -20,10 +20,13 @@ export default function CheckoutCard({
   const total = subtotal + delivery;
 
   const handlePlaceOrder = () => {
-    // For now just clear the cart and navigate to a simple confirmation route or home
+    // clear the cart, close modal (animated) then navigate to order accepted
     clearCart();
     if (onClose) onClose();
-    router.push({ pathname: "/(tabs)/explore" });
+    // wait a short moment to allow modal close animation to run
+    setTimeout(() => {
+      router.push({ pathname: "/order-accepted" });
+    }, 550);
   };
 
   const handleClose = () => {
