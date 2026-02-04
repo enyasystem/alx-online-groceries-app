@@ -21,8 +21,10 @@ export default function Home() {
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [isOfferScrolling, setIsOfferScrolling] = useState(false);
   const carouselRef = useRef<ScrollView>(null);
   const promoRef = useRef<ScrollView>(null);
+  const scrollPositionRef = useRef(0);
 
   const promos = [
     {
@@ -116,31 +118,44 @@ export default function Home() {
 
   // Auto-scroll for offers carousel - Marquee/Ticker effect
   useEffect(() => {
+    if (isOfferScrolling) return; // Pause if user is scrolling
+
     const cardWithMargin = cardWidth + cardMargin;
     const totalWidth = exclusiveOffers.length * cardWithMargin;
-    let scrollPosition = 0;
 
     const scrollInterval = setInterval(() => {
-      scrollPosition += 1; // Pixels per tick (smooth scrolling)
+      scrollPositionRef.current += 1; // Pixels per tick (smooth scrolling)
 
       carouselRef.current?.scrollTo({
-        x: scrollPosition,
+        x: scrollPositionRef.current,
         animated: false,
       });
 
       // Update index indicator for dot navigation
       const index =
-        Math.floor(scrollPosition / cardWithMargin) % exclusiveOffers.length;
+        Math.floor(scrollPositionRef.current / cardWithMargin) %
+        exclusiveOffers.length;
       setCurrentOfferIndex(index);
 
       // Reset when reaching the duplicate section
-      if (scrollPosition >= totalWidth) {
-        scrollPosition = 0;
+      if (scrollPositionRef.current >= totalWidth) {
+        scrollPositionRef.current = 0;
       }
     }, 16); // 16ms for smooth 60fps
 
     return () => clearInterval(scrollInterval);
-  }, [cardWidth, cardMargin, exclusiveOffers.length]);
+  }, [cardWidth, cardMargin, exclusiveOffers.length, isOfferScrolling]);
+
+  // Resume auto-scroll after user finishes dragging
+  useEffect(() => {
+    if (!isOfferScrolling) return;
+
+    const timer = setTimeout(() => {
+      setIsOfferScrolling(false);
+    }, 2000); // Resume after 2 seconds of inactivity
+
+    return () => clearTimeout(timer);
+  }, [isOfferScrolling]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -400,6 +415,18 @@ export default function Home() {
             scrollsToTop={false}
             nestedScrollEnabled={true}
             scrollEnabled={true}
+            onScrollBeginDrag={() => setIsOfferScrolling(true)}
+            onScroll={(event) => {
+              scrollPositionRef.current = event.nativeEvent.contentOffset.x;
+              if (isOfferScrolling) {
+                const index = Math.round(
+                  event.nativeEvent.contentOffset.x / (cardWidth + cardMargin),
+                );
+                setCurrentOfferIndex(index % exclusiveOffers.length);
+              }
+            }}
+            onScrollEndDrag={() => setIsOfferScrolling(false)}
+            onMomentumScrollEnd={() => setIsOfferScrolling(false)}
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
