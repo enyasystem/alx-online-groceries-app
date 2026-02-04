@@ -44,16 +44,128 @@ export default function OrderAccepted() {
           </View>
 
           {/* Decorative dots placed closely around the outer circle */}
-          <View style={[styles.confettiDot, { backgroundColor: "#53B175", left: -12, top: -14, width: 12, height: 12 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#34A853", left: 16, top: -20, width: 8, height: 8 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#F2994A", right: -12, top: -10, width: 10, height: 10 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#FF7A00", right: 8, top: -18, width: 6, height: 6 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#56CCF2", left: -18, bottom: -10, width: 10, height: 10 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#2D9CDB", right: -6, bottom: -12, width: 7, height: 7 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#9B59B6", left: 28, bottom: -18, width: 8, height: 8 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#27AE60", left: 62, top: -22, width: 6, height: 6 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "#F2C94C", right: 48, top: -6, width: 7, height: 7 }]} />
-          <View style={[styles.confettiDot, { backgroundColor: "transparent", left: 48, bottom: -4, width: 14, height: 14, borderWidth: 2, borderColor: "#F2C94C" }]} />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#53B175",
+                left: -12,
+                top: -14,
+                width: 12,
+                height: 12,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#34A853",
+                left: 16,
+                top: -20,
+                width: 8,
+                height: 8,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#F2994A",
+                right: -12,
+                top: -10,
+                width: 10,
+                height: 10,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#FF7A00",
+                right: 8,
+                top: -18,
+                width: 6,
+                height: 6,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#56CCF2",
+                left: -18,
+                bottom: -10,
+                width: 10,
+                height: 10,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#2D9CDB",
+                right: -6,
+                bottom: -12,
+                width: 7,
+                height: 7,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#9B59B6",
+                left: 28,
+                bottom: -18,
+                width: 8,
+                height: 8,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#27AE60",
+                left: 62,
+                top: -22,
+                width: 6,
+                height: 6,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "#F2C94C",
+                right: 48,
+                top: -6,
+                width: 7,
+                height: 7,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              {
+                backgroundColor: "transparent",
+                left: 48,
+                bottom: -4,
+                width: 14,
+                height: 14,
+                borderWidth: 2,
+                borderColor: "#F2C94C",
+              },
+            ]}
+          />
         </View>
 
         <Text style={styles.title}>Your Order has been accepted</Text>

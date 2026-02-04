@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import {
     SafeAreaView,
@@ -35,7 +36,7 @@ export default function Account() {
         <Text
           style={{
             fontSize: 28,
-            fontWeight: "bold",
+            fontWeight: "700",
             color: "#181725",
             marginBottom: 20,
           }}
@@ -43,47 +44,89 @@ export default function Account() {
           My Account
         </Text>
 
-        {/* User Info Section */}
+        {/* Header: avatar, name, email, edit */}
         <View
           style={{
-            backgroundColor: "#F2F3F2",
-            padding: 16,
-            borderRadius: 12,
-            marginBottom: 20,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingVertical: 12,
+            marginBottom: 22,
           }}
         >
-          <Text
+          <View
             style={{
-              fontSize: 18,
-              fontWeight: "600",
-              color: "#181725",
-              marginBottom: 4,
+              width: 72,
+              height: 72,
+              borderRadius: 36,
+              backgroundColor: "#EAF7EF",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: 16,
             }}
           >
-            👤 {user?.name || "User Account"}
-          </Text>
-          <Text style={{ fontSize: 13, color: "#7C7C7C", marginBottom: 8 }}>
-            {user?.phone || "Phone not available"}
-          </Text>
-          <Text style={{ fontSize: 13, color: "#7C7C7C" }}>
-            {user?.location || "Location not set"}
-          </Text>
+            {/* you can replace this with user's avatar Image if available */}
+            <Text style={{ fontSize: 22, fontWeight: "700", color: "#53B175" }}>
+              {user?.name ? user.name.split(" ")[0][0] : "E"}
+            </Text>
+          </View>
+
+          <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text
+                style={{ fontSize: 22, fontWeight: "700", color: "#181725" }}
+              >
+                {user?.name || "Enya Elvis"}
+              </Text>
+              <TouchableOpacity
+                onPress={() => router.push({ pathname: "/(tabs)/account" })}
+                style={{ marginLeft: 8 }}
+              >
+                <MaterialCommunityIcons
+                  name="pencil"
+                  size={18}
+                  color="#53B175"
+                />
+              </TouchableOpacity>
+            </View>
+            <Text style={{ fontSize: 14, color: "#9B9B9B", marginTop: 4 }}>
+              {user?.email || "enyaelvis@gmail.com"}
+            </Text>
+          </View>
         </View>
 
         {/* Menu Items */}
         {[
-          { label: "My Orders", icon: "📦" },
-          { label: "Delivery Addresses", icon: "📍" },
-          { label: "Payment Methods", icon: "💳" },
-          { label: "Notifications", icon: "🔔" },
-          { label: "Settings", icon: "⚙️" },
-          { label: "Help & Support", icon: "❓" },
+          { label: "Orders", icon: "shopping-outline", to: "/(tabs)/orders" },
+          {
+            label: "My Details",
+            icon: "card-account-details",
+            to: "/(tabs)/details",
+          },
+          {
+            label: "Delivery Address",
+            icon: "map-marker-outline",
+            to: "/(tabs)/addresses",
+          },
+          {
+            label: "Payment Methods",
+            icon: "credit-card",
+            to: "/(tabs)/payment",
+          },
+          { label: "Promo Cord", icon: "ticket-percent", to: "/(tabs)/promo" },
+          {
+            label: "Notifications",
+            icon: "bell-outline",
+            to: "/(tabs)/notifications",
+          },
+          { label: "Help", icon: "help-circle-outline", to: "/(tabs)/help" },
+          { label: "About", icon: "information-outline", to: "/(tabs)/about" },
         ].map((item, index) => (
           <TouchableOpacity
             key={index}
+            onPress={() => item.to && router.push({ pathname: item.to as any })}
             style={{
-              paddingVertical: 14,
-              borderBottomColor: "#E2E2E2",
+              paddingVertical: 18,
+              borderBottomColor: "#EAEAEA",
               borderBottomWidth: 1,
               flexDirection: "row",
               justifyContent: "space-between",
@@ -91,31 +134,54 @@ export default function Account() {
             }}
           >
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={{ fontSize: 20, marginRight: 12 }}>{item.icon}</Text>
+              <View style={{ width: 36, alignItems: "center" }}>
+                <MaterialCommunityIcons
+                  name={item.icon as any}
+                  size={22}
+                  color="#181725"
+                />
+              </View>
               <Text
-                style={{ fontSize: 16, color: "#181725", fontWeight: "500" }}
+                style={{
+                  marginLeft: 12,
+                  fontSize: 16,
+                  color: "#181725",
+                  fontWeight: "600",
+                }}
               >
                 {item.label}
               </Text>
             </View>
-            <Text style={{ fontSize: 18, color: "#7C7C7C" }}>›</Text>
+            <MaterialCommunityIcons
+              name={"chevron-right" as any}
+              size={22}
+              color="#BDBDBD"
+            />
           </TouchableOpacity>
         ))}
 
-        {/* Sign Out */}
+        {/* Log Out (styled pill) */}
         <TouchableOpacity
           onPress={handleLogout}
           style={{
-            backgroundColor: "#F44336",
-            paddingVertical: 14,
-            borderRadius: 12,
+            backgroundColor: "#F2F7F3",
+            paddingVertical: 18,
+            borderRadius: 28,
             alignItems: "center",
             marginTop: 20,
-            marginBottom: 20,
+            marginBottom: 40,
+            flexDirection: "row",
+            justifyContent: "center",
           }}
         >
-          <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-            Sign Out
+          <MaterialCommunityIcons
+            name="logout"
+            size={20}
+            color="#53B175"
+            style={{ marginRight: 12 }}
+          />
+          <Text style={{ color: "#53B175", fontSize: 18, fontWeight: "600" }}>
+            Log Out
           </Text>
         </TouchableOpacity>
       </ScrollView>
