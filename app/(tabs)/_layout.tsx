@@ -73,7 +73,7 @@ export default function TabsLayout() {
             <View
               style={{
                 position: "absolute",
-                bottom: 4,
+                bottom: 12,
                 width: 68,
                 height: 68,
                 borderRadius: 34,

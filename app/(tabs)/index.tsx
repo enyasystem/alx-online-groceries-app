@@ -1,10 +1,10 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function Home() {
@@ -66,7 +66,7 @@ export default function Home() {
       >
         {/* Header with Location and Search */}
         <View
-          style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 12 }}
+          style={{ paddingHorizontal: 20, paddingTop: 32, paddingBottom: 16 }}
         >
           <View
             style={{
