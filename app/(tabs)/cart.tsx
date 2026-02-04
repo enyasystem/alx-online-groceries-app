@@ -1,14 +1,18 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
-    Modal,
-    Pressable,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  Modal,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  Animated,
+  Easing,
+  Dimensions,
+  StyleSheet,
 } from "react-native";
 import CheckoutCard from "../../src/components/CheckoutCard";
 import { useCart } from "../../src/context/CartContext";
@@ -17,6 +21,44 @@ export default function Cart() {
   const router = useRouter();
   const [showCheckout, setShowCheckout] = useState(false);
   const { items, removeItem, updateQuantity, getTotalPrice } = useCart();
+
+  const screenHeight = Dimensions.get("window").height;
+  const translateY = useRef(new Animated.Value(screenHeight)).current;
+  const backdropOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (showCheckout) {
+      Animated.parallel([
+        Animated.timing(backdropOpacity, {
+          toValue: 1,
+          duration: 450,
+          useNativeDriver: true,
+        }),
+        Animated.timing(translateY, {
+          toValue: 0,
+          duration: 600,
+          easing: Easing.out(Easing.cubic),
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [showCheckout, backdropOpacity, translateY]);
+
+  const closeModal = () => {
+    Animated.parallel([
+      Animated.timing(backdropOpacity, {
+        toValue: 0,
+        duration: 350,
+        useNativeDriver: true,
+      }),
+      Animated.timing(translateY, {
+        toValue: screenHeight,
+        duration: 500,
+        easing: Easing.in(Easing.cubic),
+        useNativeDriver: true,
+      }),
+    ]).start(() => setShowCheckout(false));
+  };
 
   const subtotal = getTotalPrice();
   const delivery = 2.0;
@@ -322,20 +364,28 @@ export default function Cart() {
       </View>
 
       {/* Checkout Modal */}
-      <Modal
-        visible={showCheckout}
-        transparent
-        animationType="slide"
-        onRequestClose={() => setShowCheckout(false)}
-      >
-        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.35)" }}>
-          <Pressable
-            style={{ flex: 1 }}
-            onPress={() => setShowCheckout(false)}
+      <Modal visible={showCheckout} transparent onRequestClose={closeModal}>
+        <View style={{ flex: 1 }}>
+          <Animated.View
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor: "rgba(0,0,0,0.35)", opacity: backdropOpacity },
+            ]}
           />
-          <View style={{ justifyContent: "flex-end" }}>
-            <CheckoutCard onClose={() => setShowCheckout(false)} />
-          </View>
+
+          <Pressable style={{ flex: 1 }} onPress={closeModal} />
+
+          <Animated.View
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              transform: [{ translateY }],
+            }}
+          >
+            <CheckoutCard onClose={closeModal} />
+          </Animated.View>
         </View>
       </Modal>
     </SafeAreaView>

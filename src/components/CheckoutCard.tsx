@@ -9,7 +9,10 @@ interface CheckoutCardProps {
   onClose?: () => void;
 }
 
-export default function CheckoutCard({ delivery = 200, onClose }: CheckoutCardProps) {
+export default function CheckoutCard({
+  delivery = 200,
+  onClose,
+}: CheckoutCardProps) {
   const router = useRouter();
   const { getTotalPrice, clearCart } = useCart();
 
@@ -19,6 +22,7 @@ export default function CheckoutCard({ delivery = 200, onClose }: CheckoutCardPr
   const handlePlaceOrder = () => {
     // For now just clear the cart and navigate to a simple confirmation route or home
     clearCart();
+    if (onClose) onClose();
     router.push({ pathname: "/(tabs)/explore" });
   };
 
@@ -40,9 +44,19 @@ export default function CheckoutCard({ delivery = 200, onClose }: CheckoutCardPr
         shadowRadius: 8,
       }}
     >
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 12,
+        }}
+      >
         <Text style={{ fontSize: 24, fontWeight: "700" }}>Checkout</Text>
-        <TouchableOpacity onPress={handleClose} style={{ padding: 6, borderRadius: 20, backgroundColor: "#fff" }}>
+        <TouchableOpacity
+          onPress={handleClose}
+          style={{ padding: 6, borderRadius: 20, backgroundColor: "#fff" }}
+        >
           <MaterialIcons name="close" size={20} color="#181725" />
         </TouchableOpacity>
       </View>
