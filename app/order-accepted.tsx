@@ -1,4 +1,3 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -8,6 +7,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { Path, Svg } from "react-native-svg";
 
 export default function OrderAccepted() {
   const router = useRouter();
@@ -20,7 +20,54 @@ export default function OrderAccepted() {
 
       <View style={styles.content}>
         <View style={styles.iconWrap}>
-          <MaterialCommunityIcons name="check" size={96} color="#fff" />
+          <View style={styles.outerCircle}>
+            <View style={styles.innerRing}>
+              <View style={styles.checkWrap}>
+                {/* Pixel-perfect SVG checkmark (thicker) */}
+                <Svg
+                  width={120}
+                  height={120}
+                  viewBox="0 0 120 120"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <Path
+                    d="M30 65 L50 85 L90 35"
+                    stroke="#fff"
+                    strokeWidth={14}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                  />
+                </Svg>
+              </View>
+            </View>
+          </View>
+
+          {/* Decorative small dots */}
+          <View
+            style={[
+              styles.confettiDot,
+              { backgroundColor: "#53B175", left: 40, top: 8 },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              { backgroundColor: "#F2994A", right: 36, top: 18 },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              { backgroundColor: "#6FCF97", left: 24, bottom: 22 },
+            ]}
+          />
+          <View
+            style={[
+              styles.confettiDot,
+              { backgroundColor: "#56CCF2", right: 44, bottom: 40 },
+            ]}
+          />
         </View>
 
         <Text style={styles.title}>Your Order has been accepted</Text>
@@ -76,14 +123,48 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   iconWrap: {
-    width: 160,
-    height: 160,
-    borderRadius: 80,
+    width: 200,
+    height: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 24,
+  },
+  outerCircle: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
     backgroundColor: "#53B175",
     alignItems: "center",
     justifyContent: "center",
     elevation: 6,
-    marginBottom: 24,
+  },
+  innerRing: {
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    borderWidth: 3,
+    borderColor: "rgba(255,255,255,0.35)",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+  },
+  checkWrap: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+  },
+  boldCheckLayer: {
+    position: "absolute",
+  },
+  confettiDot: {
+    position: "absolute",
+    width: 16,
+    height: 16,
+    borderRadius: 8,
   },
   title: {
     fontSize: 28,
