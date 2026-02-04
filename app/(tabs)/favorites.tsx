@@ -197,7 +197,7 @@ export default function Favorites() {
           borderTopColor: "#E2E2E2",
           borderTopWidth: 1,
           padding: 20,
-            paddingBottom: 160,
+          paddingBottom: 160,
         }}
       >
         <TouchableOpacity

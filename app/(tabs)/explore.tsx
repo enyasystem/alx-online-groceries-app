@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import FavoriteBadge from "../../src/components/FavoriteBadge";
+// FavoriteBadge intentionally omitted for category cards (categories aren't favoritable here)
 
 export default function Explore() {
   const router = useRouter();
@@ -228,16 +228,7 @@ export default function Explore() {
                         </Text>
                       </View>
 
-                      {/* Favorite Badge (inside card) */}
-                      <View style={{ position: "absolute", top: 12, left: 12 }}>
-                        <FavoriteBadge
-                          productId={category.id}
-                          productName={category.name}
-                          productDescription={`${category.productCount} items`}
-                          productPrice={0}
-                          productImage={category.icon}
-                        />
-                      </View>
+                      {/* No favorite badge for category (these are category cards) */}
 
                       {/* Icon */}
                       <Text style={{ fontSize: 72, marginBottom: 12 }}>
