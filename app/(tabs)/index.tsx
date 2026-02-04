@@ -7,7 +7,7 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { useAuth } from "../../src/context/AuthContext";
 
@@ -116,16 +116,12 @@ export default function Home() {
 
   // Auto-scroll for offers carousel - Marquee/Ticker effect
   useEffect(() => {
-    const totalWidth = exclusiveOffers.length * (cardWidth + cardMargin);
+    const cardWithMargin = cardWidth + cardMargin;
+    const totalWidth = exclusiveOffers.length * cardWithMargin;
     let scrollPosition = 0;
 
     const scrollInterval = setInterval(() => {
-      scrollPosition += 2; // Pixels per tick
-
-      // Loop back to start when reaching the end
-      if (scrollPosition > totalWidth) {
-        scrollPosition = 0;
-      }
+      scrollPosition += 1; // Pixels per tick (smooth scrolling)
 
       carouselRef.current?.scrollTo({
         x: scrollPosition,
@@ -134,10 +130,14 @@ export default function Home() {
 
       // Update index indicator for dot navigation
       const index =
-        Math.floor(scrollPosition / (cardWidth + cardMargin)) %
-        exclusiveOffers.length;
+        Math.floor(scrollPosition / cardWithMargin) % exclusiveOffers.length;
       setCurrentOfferIndex(index);
-    }, 30); // Smooth 30ms intervals
+
+      // Reset when reaching the duplicate section
+      if (scrollPosition >= totalWidth) {
+        scrollPosition = 0;
+      }
+    }, 16); // 16ms for smooth 60fps
 
     return () => clearInterval(scrollInterval);
   }, [cardWidth, cardMargin, exclusiveOffers.length]);
@@ -402,9 +402,9 @@ export default function Home() {
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
-            {exclusiveOffers.map((offer) => (
+            {[...exclusiveOffers, ...exclusiveOffers].map((offer, index) => (
               <TouchableOpacity
-                key={offer.id}
+                key={`${offer.id}-${index}`}
                 onPress={() =>
                   router.push({
                     pathname: "/product-details",
