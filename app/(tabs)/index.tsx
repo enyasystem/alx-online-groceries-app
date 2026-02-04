@@ -411,10 +411,12 @@ export default function Home() {
             ref={carouselRef}
             horizontal
             showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={16}
+            scrollEventThrottle={8}
             scrollsToTop={false}
             nestedScrollEnabled={true}
             scrollEnabled={true}
+            decelerationRate="fast"
+            pagingEnabled={false}
             onScrollBeginDrag={() => setIsOfferScrolling(true)}
             onScroll={(event) => {
               scrollPositionRef.current = event.nativeEvent.contentOffset.x;
