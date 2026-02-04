@@ -46,7 +46,9 @@ export default function ProductDetails() {
   };
 
   const categoryParam = getParam(params.category);
-  const productKey = categoryParam ? `${categoryParam}-${product.id}` : `${product.id}`;
+  const productKey = categoryParam
+    ? `${categoryParam}-${product.id}`
+    : `${product.id}`;
 
   const relatedProducts = [
     { id: 2, name: "Red Apple", price: 4999, icon: "🍎" },
