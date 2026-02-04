@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useAuth } from "../../src/context/AuthContext";
 
 export default function Home() {
   const router = useRouter();
+  const { user } = useAuth();
   const categories = [
     { id: 1, name: "Vegetables", icon: "🥬", color: "#E8F5E9" },
     { id: 2, name: "Fruits", icon: "🍎", color: "#FCE4EC" },
@@ -66,9 +68,23 @@ export default function Home() {
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 100 }}
       >
+        {/* App Logo Header */}
+        <View
+          style={{
+            paddingHorizontal: 20,
+            paddingTop: 16,
+            paddingBottom: 8,
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ fontSize: 24, fontWeight: "800", color: "#53B175" }}>
+            🛒 Nectar
+          </Text>
+        </View>
+
         {/* Header with Location and Search */}
         <View
-          style={{ paddingHorizontal: 20, paddingTop: 32, paddingBottom: 16 }}
+          style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 16 }}
         >
           <View
             style={{
@@ -92,7 +108,7 @@ export default function Home() {
                   marginLeft: 6,
                 }}
               >
-                Dhaka, Banassre
+                {user?.location || "Select Location"}
               </Text>
             </View>
             <TouchableOpacity>
