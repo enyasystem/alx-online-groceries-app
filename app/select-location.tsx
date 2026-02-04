@@ -47,7 +47,9 @@ export default function SelectLocation() {
   // Get user from route params or context
   const routeParams = route.params as { userData?: string } | undefined;
   const contextUser = user;
-  const passedUser = routeParams?.userData ? JSON.parse(routeParams.userData) : null;
+  const passedUser = routeParams?.userData
+    ? JSON.parse(routeParams.userData)
+    : null;
   const currentUser = contextUser || passedUser;
 
   const handleSelectZone = (zone: (typeof NIGERIAN_ZONES)[0]) => {
@@ -79,9 +81,9 @@ export default function SelectLocation() {
         phone: "+234",
         location: "",
       };
-      
+
       updatedUser.location = `${selectedZone.name}, ${selectedArea.name}`;
-      
+
       console.log("Updating user with location:", updatedUser);
       await signIn(updatedUser);
       console.log("User updated, navigating to tabs");

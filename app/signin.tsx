@@ -29,7 +29,7 @@ const COUNTRIES = [
 export default function SignIn() {
   const router = useRouter();
   const { signIn } = useAuth();
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [showCountryModal, setShowCountryModal] = useState(false);
 
