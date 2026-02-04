@@ -296,6 +296,7 @@ export default function Cart() {
           </Text>
         </View>
         <TouchableOpacity
+          onPress={() => router.push({ pathname: "/checkout" })}
           style={{
             backgroundColor: "#53B175",
             paddingVertical: 16,
