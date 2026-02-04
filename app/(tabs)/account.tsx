@@ -25,7 +25,12 @@ export default function Account() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 24, paddingTop: 32 }}
+        style={{
+          flex: 1,
+          paddingHorizontal: 20,
+          paddingVertical: 24,
+          paddingTop: 32,
+        }}
       >
         <Text
           style={{

@@ -85,7 +85,12 @@ export default function Explore() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100, paddingHorizontal: 20, paddingVertical: 24, paddingTop: 32 }}
+        contentContainerStyle={{
+          paddingBottom: 100,
+          paddingHorizontal: 20,
+          paddingVertical: 24,
+          paddingTop: 32,
+        }}
       >
         {/* Header */}
         <View
