@@ -72,7 +72,7 @@ export default function Explore() {
 
   const handleCategoryPress = (category: (typeof categories)[0]) => {
     router.push({
-      pathname: "/explore",
+      pathname: "/category-products",
       params: { category: category.name },
     });
   };

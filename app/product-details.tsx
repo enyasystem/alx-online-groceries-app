@@ -19,11 +19,11 @@ export default function ProductDetails() {
   const product = {
     id: params.id || 1,
     name: params.name || "Organic Bananas",
-    price: parseFloat(params.price as string) || 4.99,
+    price: parseInt(params.price as string) || 2199,
     originalPrice:
-      parseFloat(params.originalPrice as string) || params.price
-        ? parseFloat(params.price as string) * 1.4
-        : 6.99,
+      parseInt(params.originalPrice as string) || params.price
+        ? Math.round(parseInt(params.price as string) * 1.4)
+        : 3050,
     rating: parseFloat(params.rating as string) || 4.5,
     reviews: parseInt(params.reviews as string) || 128,
     weight: params.weight || "7pcs, Priceg",
@@ -36,9 +36,9 @@ export default function ProductDetails() {
   };
 
   const relatedProducts = [
-    { id: 2, name: "Red Apple", price: 4.99, icon: "🍎" },
-    { id: 3, name: "Carrot", price: 3.99, icon: "🥕" },
-    { id: 4, name: "Mango", price: 5.99, icon: "🥭" },
+    { id: 2, name: "Red Apple", price: 4999, icon: "🍎" },
+    { id: 3, name: "Carrot", price: 1750, icon: "🥕" },
+    { id: 4, name: "Mango", price: 2650, icon: "🥭" },
   ];
 
   const handleAddToCart = () => {
@@ -168,7 +168,7 @@ export default function ProductDetails() {
                   marginRight: 12,
                 }}
               >
-                ${product.price}
+                ₦{product.price.toLocaleString()}
               </Text>
               <Text
                 style={{
@@ -177,7 +177,7 @@ export default function ProductDetails() {
                   textDecorationLine: "line-through",
                 }}
               >
-                ${product.originalPrice}
+                ₦{Math.round(product.originalPrice).toLocaleString()}
               </Text>
             </View>
           </View>
@@ -286,7 +286,7 @@ export default function ProductDetails() {
                     color: "#53B175",
                   }}
                 >
-                  ${item.price}
+                  ₦{item.price.toLocaleString()}
                 </Text>
               </TouchableOpacity>
             ))}
