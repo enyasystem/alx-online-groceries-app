@@ -185,6 +185,7 @@ export default function SearchScreen() {
       }}
     >
       <TouchableOpacity
+        activeOpacity={0.7}
         onPress={() =>
           router.push({
             pathname: "/product-details",
@@ -280,14 +281,24 @@ export default function SearchScreen() {
         </View>
       </TouchableOpacity>
 
-      {/* Favorite Badge - Outside TouchableOpacity for proper z-index */}
-      <FavoriteBadge
-        productId={item.id}
-        productName={item.name}
-        productDescription={item.details}
-        productPrice={parseInt(item.price as any) || 0}
-        productImage={item.icon}
-      />
+      {/* Favorite Badge - Positioned on card */}
+      <View
+        style={{
+          position: "absolute",
+          top: 20,
+          right: 12,
+          zIndex: 10,
+        }}
+        pointerEvents="box-none"
+      >
+        <FavoriteBadge
+          productId={item.id}
+          productName={item.name}
+          productDescription={item.details}
+          productPrice={parseInt(item.price as any) || 0}
+          productImage={item.icon}
+        />
+      </View>
     </View>
   );
 

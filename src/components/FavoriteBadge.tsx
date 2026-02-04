@@ -38,9 +38,6 @@ export default function FavoriteBadge({
     <TouchableOpacity
       onPress={handleToggleFavorite}
       style={{
-        position: "absolute",
-        top: 12,
-        right: 12,
         width: 40,
         height: 40,
         borderRadius: 20,
@@ -56,7 +53,7 @@ export default function FavoriteBadge({
     >
       <MaterialCommunityIcons
         name={isLiked ? "heart" : "heart-outline"}
-        size={24}
+        size={20}
         color={isLiked ? "#53B175" : "#BDBDBD"}
       />
     </TouchableOpacity>

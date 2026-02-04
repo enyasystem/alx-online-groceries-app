@@ -15,11 +15,7 @@ export default function ProductDetails() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const { addItem } = useCart();
-  const {
-    addFavorite,
-    removeFavorite,
-    isFavorite: checkIsFavorite,
-  } = useFavorites();
+  const { addFavorite, removeFavorite } = useFavorites();
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
 
