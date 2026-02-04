@@ -213,6 +213,42 @@ export default function SignIn() {
             Continue with Facebook
           </Text>
         </TouchableOpacity>
+
+        {/* Divider */}
+        <View
+          style={{
+            height: 1,
+            backgroundColor: "#E2E2E2",
+            marginVertical: 24,
+          }}
+        />
+
+        {/* Login/Signup Links */}
+        <View style={{ flexDirection: "row", justifyContent: "center", gap: 8 }}>
+          <TouchableOpacity onPress={() => router.push("/login")}>
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: "600",
+                color: "#53B175",
+              }}
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 14, color: "#7C7C7C" }}>or</Text>
+          <TouchableOpacity onPress={() => router.push("/signup")}>
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: "600",
+                color: "#53B175",
+              }}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
 
       {/* Loading Bar */}

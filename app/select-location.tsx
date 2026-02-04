@@ -2,13 +2,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  FlatList,
-  Modal,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
+    FlatList,
+    Modal,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 const NIGERIAN_ZONES = [
@@ -34,7 +34,9 @@ const AREA_TYPES = [
 export default function SelectLocation() {
   const router = useRouter();
   const [selectedZone, setSelectedZone] = useState(NIGERIAN_ZONES[0]);
-  const [selectedArea, setSelectedArea] = useState<(typeof AREA_TYPES)[0] | null>(null);
+  const [selectedArea, setSelectedArea] = useState<
+    (typeof AREA_TYPES)[0] | null
+  >(null);
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showAreaModal, setShowAreaModal] = useState(false);
 
@@ -121,7 +123,8 @@ export default function SelectLocation() {
               lineHeight: 21,
             }}
           >
-            Switch on your location to stay in tune with{"\n"}what's happening in your area
+            Switch on your location to stay in tune with{"\n"}what's happening
+            in your area
           </Text>
 
           {/* Your Zone */}
