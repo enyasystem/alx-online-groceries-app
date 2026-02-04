@@ -1,7 +1,8 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  Dimensions,
   SafeAreaView,
   ScrollView,
   Text,
@@ -10,13 +11,18 @@ import {
 } from "react-native";
 import { useAuth } from "../../src/context/AuthContext";
 
+const { width: windowWidth } = Dimensions.get("window");
+const cardWidth = windowWidth - 40; // 20px padding on each side
+const cardMargin = 12;
+
 export default function Home() {
   const router = useRouter();
   const { user } = useAuth();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
   const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
-  const carouselRef = useRef(null);
-  const promoRef = useRef(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const carouselRef = useRef<ScrollView>(null);
+  const promoRef = useRef<ScrollView>(null);
 
   const promos = [
     {
@@ -89,6 +95,42 @@ export default function Home() {
     { id: 3, name: "Lettuce", weight: "500g", price: "$2.99", icon: "🥬" },
     { id: 4, name: "Spinach", weight: "500g", price: "$2.49", icon: "🥬" },
   ];
+
+  // Auto-scroll for promo carousel
+  useEffect(() => {
+    if (!isAutoScrolling || !promoRef.current) return;
+
+    const promoInterval = setInterval(() => {
+      setCurrentPromoIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % promos.length;
+        promoRef.current?.scrollTo({
+          x: nextIndex * (cardWidth + cardMargin),
+          animated: true,
+        });
+        return nextIndex;
+      });
+    }, 4000);
+
+    return () => clearInterval(promoInterval);
+  }, [isAutoScrolling, promos.length]);
+
+  // Auto-scroll for offers carousel
+  useEffect(() => {
+    if (!isAutoScrolling || !carouselRef.current) return;
+
+    const offerInterval = setInterval(() => {
+      setCurrentOfferIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % exclusiveOffers.length;
+        carouselRef.current?.scrollTo({
+          x: nextIndex * (cardWidth + cardMargin),
+          animated: true,
+        });
+        return nextIndex;
+      });
+    }, 5000);
+
+    return () => clearInterval(offerInterval);
+  }, [isAutoScrolling, exclusiveOffers.length]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -178,10 +220,12 @@ export default function Home() {
             scrollEventThrottle={16}
             onMomentumScrollEnd={(event) => {
               const index = Math.round(
-                event.nativeEvent.contentOffset.x / (400 + 12),
+                event.nativeEvent.contentOffset.x / (cardWidth + cardMargin),
               );
               setCurrentPromoIndex(index % promos.length);
+              setIsAutoScrolling(true);
             }}
+            onScrollBeginDrag={() => setIsAutoScrolling(false)}
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
@@ -197,8 +241,8 @@ export default function Home() {
                   padding: 24,
                   flexDirection: "row",
                   alignItems: "center",
-                  width: 380,
-                  marginRight: 12,
+                  width: cardWidth,
+                  marginRight: cardMargin,
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 4 },
                   shadowOpacity: 0.15,
@@ -345,10 +389,12 @@ export default function Home() {
             scrollEventThrottle={16}
             onMomentumScrollEnd={(event) => {
               const index = Math.round(
-                event.nativeEvent.contentOffset.x / (400 + 12),
+                event.nativeEvent.contentOffset.x / (cardWidth + cardMargin),
               );
               setCurrentOfferIndex(index % exclusiveOffers.length);
+              setIsAutoScrolling(true);
             }}
+            onScrollBeginDrag={() => setIsAutoScrolling(false)}
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
@@ -371,8 +417,8 @@ export default function Home() {
                   backgroundColor: offer.bgColor,
                   borderRadius: 20,
                   padding: 20,
-                  width: 380,
-                  marginRight: 12,
+                  width: cardWidth,
+                  marginRight: cardMargin,
                   justifyContent: "space-between",
                   height: 200,
                   shadowColor: "#000",
