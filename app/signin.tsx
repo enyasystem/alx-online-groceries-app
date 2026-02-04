@@ -59,166 +59,166 @@ export default function SignIn() {
           }}
         >
           {/* Hero Image */}
-        <View
-          style={{
-            width: "100%",
-            height: 250,
-            borderRadius: 24,
-            overflow: "hidden",
-            marginBottom: 32,
-            backgroundColor: "#f0f0f0",
-          }}
-        >
-          <Image
-            source={require("../assets/images/onboarding-hero.jpg")}
-            style={{
-              width: "100%",
-              height: "100%",
-              resizeMode: "cover",
-            }}
-          />
-        </View>
-
-        {/* Headline */}
-        <Text
-          style={{
-            fontSize: 32,
-            fontWeight: "800",
-            color: "#181725",
-            marginBottom: 32,
-            lineHeight: 40,
-          }}
-        >
-          Get your groceries{"\n"}with nectar
-        </Text>
-
-        {/* Phone Number Input */}
-        <View
-          style={{
-            marginBottom: 32,
-            borderBottomColor: "#E2E2E2",
-            borderBottomWidth: 1,
-          }}
-        >
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              paddingVertical: 12,
+              width: "100%",
+              height: 250,
+              borderRadius: 24,
+              overflow: "hidden",
+              marginBottom: 32,
+              backgroundColor: "#f0f0f0",
             }}
           >
-            {/* Country Selector */}
-            <TouchableOpacity
-              onPress={() => setShowCountryModal(true)}
+            <Image
+              source={require("../assets/images/onboarding-hero.jpg")}
+              style={{
+                width: "100%",
+                height: "100%",
+                resizeMode: "cover",
+              }}
+            />
+          </View>
+
+          {/* Headline */}
+          <Text
+            style={{
+              fontSize: 32,
+              fontWeight: "800",
+              color: "#181725",
+              marginBottom: 32,
+              lineHeight: 40,
+            }}
+          >
+            Get your groceries{"\n"}with nectar
+          </Text>
+
+          {/* Phone Number Input */}
+          <View
+            style={{
+              marginBottom: 32,
+              borderBottomColor: "#E2E2E2",
+              borderBottomWidth: 1,
+            }}
+          >
+            <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                marginRight: 12,
-              }}
-            >
-              <Text style={{ fontSize: 24, marginRight: 8 }}>
-                {selectedCountry.flag}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "600",
-                  color: "#181725",
-                  marginRight: 4,
-                }}
-              >
-                {selectedCountry.code}
-              </Text>
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={20}
-                color="#181725"
-              />
-            </TouchableOpacity>
-
-            {/* Phone Input - Clickable */}
-            <TouchableOpacity
-              onPress={() => router.push("/verify-phone")}
-              style={{
-                flex: 1,
                 paddingVertical: 12,
               }}
             >
-              <Text
+              {/* Country Selector */}
+              <TouchableOpacity
+                onPress={() => setShowCountryModal(true)}
                 style={{
-                  fontSize: 16,
-                  color: "#CCCCCC",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginRight: 12,
                 }}
               >
-                Enter phone number
-              </Text>
-            </TouchableOpacity>
+                <Text style={{ fontSize: 24, marginRight: 8 }}>
+                  {selectedCountry.flag}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "600",
+                    color: "#181725",
+                    marginRight: 4,
+                  }}
+                >
+                  {selectedCountry.code}
+                </Text>
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={20}
+                  color="#181725"
+                />
+              </TouchableOpacity>
+
+              {/* Phone Input - Clickable */}
+              <TouchableOpacity
+                onPress={() => router.push("/verify-phone")}
+                style={{
+                  flex: 1,
+                  paddingVertical: 12,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: "#CCCCCC",
+                  }}
+                >
+                  Enter phone number
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
 
-        {/* Or Connect Text */}
-        <Text
-          style={{
-            fontSize: 14,
-            color: "#7C7C7C",
-            textAlign: "center",
-            marginBottom: 24,
-          }}
-        >
-          Or connect with social media
-        </Text>
-
-        {/* Google Button */}
-        <TouchableOpacity
-          onPress={handleGoogleSignIn}
-          style={{
-            backgroundColor: "#5B9DF9",
-            paddingVertical: 16,
-            borderRadius: 28,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 16,
-          }}
-        >
-          <Text style={{ fontSize: 20, marginRight: 12 }}>G</Text>
+          {/* Or Connect Text */}
           <Text
             style={{
-              fontSize: 16,
-              fontWeight: "600",
-              color: "#fff",
+              fontSize: 14,
+              color: "#7C7C7C",
+              textAlign: "center",
+              marginBottom: 24,
             }}
           >
-            Continue with Google
+            Or connect with social media
           </Text>
-        </TouchableOpacity>
 
-        {/* Facebook Button */}
-        <TouchableOpacity
-          onPress={handleFacebookSignIn}
-          style={{
-            backgroundColor: "#2D5AA3",
-            paddingVertical: 16,
-            borderRadius: 28,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 24,
-          }}
-        >
-          <Text style={{ fontSize: 20, marginRight: 12, color: "#fff" }}>
-            f
-          </Text>
-          <Text
+          {/* Google Button */}
+          <TouchableOpacity
+            onPress={handleGoogleSignIn}
             style={{
-              fontSize: 16,
-              fontWeight: "600",
-              color: "#fff",
+              backgroundColor: "#5B9DF9",
+              paddingVertical: 16,
+              borderRadius: 28,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 16,
             }}
           >
-            Continue with Facebook
-          </Text>
-        </TouchableOpacity>
+            <Text style={{ fontSize: 20, marginRight: 12 }}>G</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "600",
+                color: "#fff",
+              }}
+            >
+              Continue with Google
+            </Text>
+          </TouchableOpacity>
+
+          {/* Facebook Button */}
+          <TouchableOpacity
+            onPress={handleFacebookSignIn}
+            style={{
+              backgroundColor: "#2D5AA3",
+              paddingVertical: 16,
+              borderRadius: 28,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: 24,
+            }}
+          >
+            <Text style={{ fontSize: 20, marginRight: 12, color: "#fff" }}>
+              f
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "600",
+                color: "#fff",
+              }}
+            >
+              Continue with Facebook
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
 
         {/* Login/Signup Links - Fixed Bottom */}
@@ -281,96 +281,96 @@ export default function SignIn() {
           <View
             style={{
               flex: 1,
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            justifyContent: "flex-end",
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: "#fff",
-              borderTopLeftRadius: 24,
-              borderTopRightRadius: 24,
-              maxHeight: "80%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              justifyContent: "flex-end",
             }}
           >
-            {/* Header */}
             <View
               style={{
-                padding: 20,
-                borderBottomColor: "#E2E2E2",
-                borderBottomWidth: 1,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
+                backgroundColor: "#fff",
+                borderTopLeftRadius: 24,
+                borderTopRightRadius: 24,
+                maxHeight: "80%",
               }}
             >
-              <Text
+              {/* Header */}
+              <View
                 style={{
-                  fontSize: 18,
-                  fontWeight: "600",
-                  color: "#181725",
+                  padding: 20,
+                  borderBottomColor: "#E2E2E2",
+                  borderBottomWidth: 1,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                Select Country
-              </Text>
-              <TouchableOpacity onPress={() => setShowCountryModal(false)}>
-                <MaterialIcons name="close" size={24} color="#181725" />
-              </TouchableOpacity>
-            </View>
-
-            {/* Country List */}
-            <FlatList
-              data={COUNTRIES}
-              keyExtractor={(item) => item.code}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => handleSelectCountry(item)}
+                <Text
                   style={{
-                    paddingVertical: 16,
-                    paddingHorizontal: 20,
-                    borderBottomColor: "#F0F0F0",
-                    borderBottomWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    backgroundColor:
-                      selectedCountry.code === item.code ? "#F0F0F0" : "#fff",
+                    fontSize: 18,
+                    fontWeight: "600",
+                    color: "#181725",
                   }}
                 >
-                  <Text style={{ fontSize: 24, marginRight: 12 }}>
-                    {item.flag}
-                  </Text>
-                  <View style={{ flex: 1 }}>
+                  Select Country
+                </Text>
+                <TouchableOpacity onPress={() => setShowCountryModal(false)}>
+                  <MaterialIcons name="close" size={24} color="#181725" />
+                </TouchableOpacity>
+              </View>
+
+              {/* Country List */}
+              <FlatList
+                data={COUNTRIES}
+                keyExtractor={(item) => item.code}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() => handleSelectCountry(item)}
+                    style={{
+                      paddingVertical: 16,
+                      paddingHorizontal: 20,
+                      borderBottomColor: "#F0F0F0",
+                      borderBottomWidth: 1,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      backgroundColor:
+                        selectedCountry.code === item.code ? "#F0F0F0" : "#fff",
+                    }}
+                  >
+                    <Text style={{ fontSize: 24, marginRight: 12 }}>
+                      {item.flag}
+                    </Text>
+                    <View style={{ flex: 1 }}>
+                      <Text
+                        style={{
+                          fontSize: 16,
+                          fontWeight: "500",
+                          color: "#181725",
+                        }}
+                      >
+                        {item.name}
+                      </Text>
+                    </View>
                     <Text
                       style={{
                         fontSize: 16,
-                        fontWeight: "500",
-                        color: "#181725",
+                        color: "#7C7C7C",
+                        marginRight: 8,
                       }}
                     >
-                      {item.name}
+                      {item.code}
                     </Text>
-                  </View>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#7C7C7C",
-                      marginRight: 8,
-                    }}
-                  >
-                    {item.code}
-                  </Text>
-                  {selectedCountry.code === item.code && (
-                    <MaterialIcons
-                      name="check-circle"
-                      size={24}
-                      color="#53B175"
-                    />
-                  )}
-                </TouchableOpacity>
-              )}
-            />
+                    {selectedCountry.code === item.code && (
+                      <MaterialIcons
+                        name="check-circle"
+                        size={24}
+                        color="#53B175"
+                      />
+                    )}
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
           </View>
-        </View>
         </Modal>
       </View>
     </SafeAreaView>
