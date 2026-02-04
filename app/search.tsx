@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import FiltersModal from "../src/components/FiltersModal";
 import { useAuth } from "../src/context/AuthContext";
 
 const { width: windowWidth } = Dimensions.get("window");
@@ -120,17 +121,59 @@ export default function SearchScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [showFilters, setShowFilters] = useState(false);
+  const [activeFilters, setActiveFilters] = useState<{
+    categories: string[];
+    brands: string[];
+  }>({ categories: [], brands: [] });
 
-  useEffect(() => {
-    if (searchQuery.trim() === "") {
-      setFilteredProducts(allProducts);
-    } else {
-      const filtered = allProducts.filter((product) =>
+  const applyFilters = (filters: {
+    categories: string[];
+    brands: string[];
+  }) => {
+    setActiveFilters(filters);
+    let result = allProducts;
+
+    // Filter by search query
+    if (searchQuery.trim() !== "") {
+      result = result.filter((product) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase()),
       );
-      setFilteredProducts(filtered);
     }
-  }, [searchQuery]);
+
+    // Filter by categories
+    if (filters.categories.length > 0) {
+      result = result.filter((product) =>
+        filters.categories.includes(product.category),
+      );
+    }
+
+    // Filter by brands (would need brand data in products)
+    // For now, we'll just set the filter state for future use
+
+    setFilteredProducts(result);
+  };
+
+  useEffect(() => {
+    if (searchQuery.trim() === "" && activeFilters.categories.length === 0) {
+      setFilteredProducts(allProducts);
+    } else {
+      let result = allProducts;
+
+      if (searchQuery.trim() !== "") {
+        result = result.filter((product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
+      }
+
+      if (activeFilters.categories.length > 0) {
+        result = result.filter((product) =>
+          activeFilters.categories.includes(product.category),
+        );
+      }
+
+      setFilteredProducts(result);
+    }
+  }, [searchQuery, activeFilters]);
 
   const renderProductCard = ({ item }: { item: (typeof allProducts)[0] }) => (
     <TouchableOpacity
@@ -387,6 +430,13 @@ export default function SearchScreen() {
             </Text>
           </View>
         }
+      />
+
+      {/* Filters Modal */}
+      <FiltersModal
+        visible={showFilters}
+        onClose={() => setShowFilters(false)}
+        onApply={applyFilters}
       />
     </SafeAreaView>
   );
