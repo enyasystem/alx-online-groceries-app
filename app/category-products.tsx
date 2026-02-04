@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import FavoriteBadge from "../src/components/FavoriteBadge";
 
 export default function CategoryProducts() {
   const router = useRouter();
@@ -406,130 +407,148 @@ export default function CategoryProducts() {
             }}
           >
             {categoryProducts.map((product) => (
-              <TouchableOpacity
+              <View
                 key={product.id}
-                onPress={() => handleProductPress(product)}
-                activeOpacity={0.8}
                 style={{
                   width: "48%",
                   marginBottom: 16,
+                  position: "relative",
                 }}
               >
-                {/* Product Card */}
-                <View
-                  style={{
-                    backgroundColor: "#fff",
-                    borderRadius: 16,
-                    borderWidth: 1,
-                    borderColor: "#E8E8E8",
-                    overflow: "hidden",
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.05,
-                    shadowRadius: 4,
-                    elevation: 2,
-                  }}
+                <TouchableOpacity
+                  onPress={() => handleProductPress(product)}
+                  activeOpacity={0.8}
                 >
-                  {/* Product Image Container */}
+                  {/* Product Card */}
                   <View
                     style={{
-                      backgroundColor: "#F2F3F2",
-                      height: 140,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderBottomWidth: 1,
-                      borderBottomColor: "#E8E8E8",
+                      backgroundColor: "#fff",
+                      borderRadius: 16,
+                      borderWidth: 1,
+                      borderColor: "#E8E8E8",
+                      overflow: "hidden",
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 2 },
+                      shadowOpacity: 0.05,
+                      shadowRadius: 4,
+                      elevation: 2,
                     }}
                   >
-                    <Text style={{ fontSize: 56 }}>{product.image}</Text>
-                  </View>
-
-                  {/* Product Info */}
-                  <View style={{ padding: 12 }}>
-                    {/* Product Name */}
-                    <Text
-                      style={{
-                        fontSize: 13,
-                        fontWeight: "700",
-                        color: "#181725",
-                        marginBottom: 4,
-                        lineHeight: 18,
-                      }}
-                      numberOfLines={2}
-                    >
-                      {product.name}
-                    </Text>
-
-                    {/* Size/Description */}
-                    <Text
-                      style={{
-                        fontSize: 11,
-                        color: "#7C7C7C",
-                        fontWeight: "500",
-                        marginBottom: 8,
-                      }}
-                    >
-                      {product.size}
-                    </Text>
-
-                    {/* Price and Add Button */}
+                    {/* Product Image Container */}
                     <View
                       style={{
-                        flexDirection: "row",
+                        backgroundColor: "#F2F3F2",
+                        height: 140,
                         alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
+                        borderBottomWidth: 1,
+                        borderBottomColor: "#E8E8E8",
                       }}
                     >
-                      {/* Price Section */}
-                      <View>
-                        <Text
-                          style={{
-                            fontSize: 13,
-                            fontWeight: "700",
-                            color: "#53B175",
-                          }}
-                        >
-                          ₦{product.price.toLocaleString()}
-                        </Text>
-                        {product.originalPrice && (
-                          <Text
-                            style={{
-                              fontSize: 11,
-                              color: "#BDBDBD",
-                              textDecorationLine: "line-through",
-                              marginTop: 2,
-                            }}
-                          >
-                            ₦{product.originalPrice.toLocaleString()}
-                          </Text>
-                        )}
-                      </View>
+                      <Text style={{ fontSize: 56 }}>{product.image}</Text>
+                    </View>
 
-                      {/* Add Button */}
-                      <TouchableOpacity
+                    {/* Product Info */}
+                    <View style={{ padding: 12 }}>
+                      {/* Product Name */}
+                      <Text
                         style={{
-                          backgroundColor: "#53B175",
-                          width: 32,
-                          height: 32,
-                          borderRadius: 10,
-                          alignItems: "center",
-                          justifyContent: "center",
+                          fontSize: 13,
+                          fontWeight: "700",
+                          color: "#181725",
+                          marginBottom: 4,
+                          lineHeight: 18,
+                        }}
+                        numberOfLines={2}
+                      >
+                        {product.name}
+                      </Text>
+
+                      {/* Size/Description */}
+                      <Text
+                        style={{
+                          fontSize: 11,
+                          color: "#7C7C7C",
+                          fontWeight: "500",
+                          marginBottom: 8,
                         }}
                       >
-                        <Text
+                        {product.size}
+                      </Text>
+
+                      {/* Price and Add Button */}
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        {/* Price Section */}
+                        <View>
+                          <Text
+                            style={{
+                              fontSize: 13,
+                              fontWeight: "700",
+                              color: "#53B175",
+                            }}
+                          >
+                            ₦{product.price.toLocaleString()}
+                          </Text>
+                          {product.originalPrice && (
+                            <Text
+                              style={{
+                                fontSize: 11,
+                                color: "#BDBDBD",
+                                textDecorationLine: "line-through",
+                                marginTop: 2,
+                              }}
+                            >
+                              ₦{product.originalPrice.toLocaleString()}
+                            </Text>
+                          )}
+                        </View>
+
+                        {/* Add Button */}
+                        <TouchableOpacity
                           style={{
-                            fontSize: 18,
-                            color: "#fff",
-                            fontWeight: "600",
+                            backgroundColor: "#53B175",
+                            width: 32,
+                            height: 32,
+                            borderRadius: 10,
+                            alignItems: "center",
+                            justifyContent: "center",
                           }}
                         >
-                          +
-                        </Text>
-                      </TouchableOpacity>
+                          <Text
+                            style={{
+                              fontSize: 18,
+                              color: "#fff",
+                              fontWeight: "600",
+                            }}
+                          >
+                            +
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
+                </TouchableOpacity>
+
+                {/* Favorite badge positioned on card */}
+                <View
+                  style={{ position: "absolute", top: 8, right: 8, zIndex: 10 }}
+                  pointerEvents="box-none"
+                >
+                  <FavoriteBadge
+                    productId={product.id}
+                    productName={product.name}
+                    productDescription={product.size}
+                    productPrice={product.price}
+                    productImage={product.image}
+                  />
                 </View>
-              </TouchableOpacity>
+              </View>
             ))}
           </View>
         </View>

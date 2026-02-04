@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useCart } from "../src/context/CartContext";
 import { useFavorites } from "../src/context/FavoritesContext";
+import FavoriteBadge from "../src/components/FavoriteBadge";
 
 export default function ProductDetails() {
   const router = useRouter();
@@ -128,18 +129,29 @@ export default function ProductDetails() {
             alignItems: "center",
           }}
         >
-          <View
-            style={{
-              width: "100%",
-              height: 250,
-              backgroundColor: "#F2F3F2",
-              borderRadius: 20,
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: 16,
-            }}
-          >
-            <Text style={{ fontSize: 100 }}>{product.icon}</Text>
+          <View style={{ width: "100%", position: "relative", marginBottom: 16 }}>
+            <View
+              style={{
+                width: "100%",
+                height: 250,
+                backgroundColor: "#F2F3F2",
+                borderRadius: 20,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 100 }}>{product.icon}</Text>
+            </View>
+
+            <View style={{ position: "absolute", top: 12, right: 12 }}>
+              <FavoriteBadge
+                productId={product.id}
+                productName={product.name}
+                productDescription={product.weight}
+                productPrice={product.price}
+                productImage={product.icon}
+              />
+            </View>
           </View>
 
           {/* Product Info */}
