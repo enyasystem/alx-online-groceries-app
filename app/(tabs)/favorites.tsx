@@ -4,7 +4,7 @@ export default function Favorites() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
-        style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 16 }}
+        style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 24, paddingTop: 32 }}
       >
         <Text
           style={{

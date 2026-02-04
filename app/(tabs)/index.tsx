@@ -63,25 +63,27 @@ export default function Home() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      {/* App Logo Header */}
+      <View
+        style={{
+          paddingHorizontal: 20,
+          paddingVertical: 20,
+          paddingTop: 32,
+          alignItems: "center",
+          borderBottomColor: "#F0F0F0",
+          borderBottomWidth: 1,
+        }}
+      >
+        <Text style={{ fontSize: 24, fontWeight: "800", color: "#53B175" }}>
+          🛒 Nectar
+        </Text>
+      </View>
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ flex: 1 }}
         contentContainerStyle={{ paddingBottom: 100 }}
       >
-        {/* App Logo Header */}
-        <View
-          style={{
-            paddingHorizontal: 20,
-            paddingTop: 16,
-            paddingBottom: 8,
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ fontSize: 24, fontWeight: "800", color: "#53B175" }}>
-            🛒 Nectar
-          </Text>
-        </View>
-
         {/* Header with Location and Search */}
         <View
           style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 16 }}
