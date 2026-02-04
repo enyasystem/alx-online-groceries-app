@@ -191,8 +191,15 @@ export default function Favorites() {
         </View>
       </ScrollView>
 
-      {/* Add All To Cart Button */}
-      <View style={{ padding: 20, paddingBottom: 90 }}>
+      {/* Add All To Cart Button (bottom checkout section like Cart) */}
+      <View
+        style={{
+          borderTopColor: "#E2E2E2",
+          borderTopWidth: 1,
+          padding: 20,
+            paddingBottom: 160,
+        }}
+      >
         <TouchableOpacity
           onPress={handleAddAllToCart}
           style={{
@@ -200,15 +207,12 @@ export default function Favorites() {
             paddingVertical: 16,
             borderRadius: 16,
             alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+            gap: 12,
           }}
         >
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: "600",
-              color: "#fff",
-            }}
-          >
+          <Text style={{ fontSize: 18, fontWeight: "600", color: "#fff" }}>
             Add All To Cart
           </Text>
         </TouchableOpacity>
