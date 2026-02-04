@@ -1,17 +1,100 @@
 import { useRouter } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { View, Text, Animated, SafeAreaView } from "react-native";
 
 export default function SplashScreen() {
   const router = useRouter();
+  const [progress] = useState(new Animated.Value(0));
 
   useEffect(() => {
-    // Navigate to onboarding after a short delay
+    // Animate progress bar
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+
+    // Navigate after 2.5 seconds
     const timer = setTimeout(() => {
       router.replace("/onboarding");
-    }, 500);
+    }, 2500);
 
     return () => clearTimeout(timer);
-  }, [router]);
+  }, [router, progress]);
 
-  return null;
+  const progressWidth = progress.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0%", "70%"],
+  });
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#53B175" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          paddingHorizontal: 20,
+        }}
+      >
+        {/* Logo + Carrot in Row */}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 12,
+          }}
+        >
+          {/* Carrot Icon */}
+          <Text style={{ fontSize: 52, color: "#fff", marginRight: 12 }}>
+            🥕
+          </Text>
+
+          {/* Nectar Text */}
+          <Text
+            style={{
+              fontSize: 56,
+              fontWeight: "800",
+              color: "#fff",
+              letterSpacing: 1,
+            }}
+          >
+            nectar
+          </Text>
+        </View>
+
+        {/* Tagline */}
+        <Text
+          style={{
+            fontSize: 13,
+            color: "#fff",
+            letterSpacing: 2.5,
+            opacity: 0.9,
+          }}
+        >
+          online groceries
+        </Text>
+      </View>
+
+      {/* Loading Bar */}
+      <View
+        style={{
+          height: 3,
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          marginHorizontal: 40,
+          marginBottom: 60,
+          borderRadius: 2,
+        }}
+      >
+        <Animated.View
+          style={{
+            height: "100%",
+            backgroundColor: "#fff",
+            width: progressWidth,
+            borderRadius: 2,
+          }}
+        />
+      </View>
+    </SafeAreaView>
+  );
 }
