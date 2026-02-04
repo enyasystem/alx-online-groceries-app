@@ -167,7 +167,7 @@ export default function Favorites() {
                       marginBottom: 8,
                     }}
                   >
-                    ${item.price.toFixed(2)}
+                    ₦{item.price.toLocaleString()}
                   </Text>
                   <MaterialCommunityIcons
                     name="chevron-right"
