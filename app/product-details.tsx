@@ -8,28 +8,35 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useCart } from "../src/context/CartContext";
 
 export default function ProductDetails() {
   const router = useRouter();
   const params = useLocalSearchParams();
+  const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const getParam = (value: string | string[] | undefined): string => {
+    if (Array.isArray(value)) return value[0];
+    return value ?? "";
+  };
+
   // Product data from route parameters
   const product = {
-    id: params.id || 1,
-    name: params.name || "Organic Bananas",
-    price: parseInt(params.price as string) || 2199,
+    id: parseInt(getParam(params.id)) || 1,
+    name: getParam(params.name) || "Organic Bananas",
+    price: parseInt(getParam(params.price)) || 2199,
     originalPrice:
-      parseInt(params.originalPrice as string) || params.price
-        ? Math.round(parseInt(params.price as string) * 1.4)
+      parseInt(getParam(params.originalPrice)) || getParam(params.price)
+        ? Math.round(parseInt(getParam(params.price)) * 1.4)
         : 3050,
-    rating: parseFloat(params.rating as string) || 4.5,
-    reviews: parseInt(params.reviews as string) || 128,
-    weight: params.weight || "7pcs, Priceg",
-    icon: params.icon || "🍌",
+    rating: parseFloat(getParam(params.rating)) || 4.5,
+    reviews: parseInt(getParam(params.reviews)) || 128,
+    weight: getParam(params.weight) || "7pcs, Priceg",
+    icon: getParam(params.icon) || "🍌",
     description:
-      params.details ||
+      getParam(params.details) ||
       "Fresh, organic product sourced directly from local farms. Hand-picked to ensure the best quality.",
     inStock: true,
     quantity: 50,
@@ -42,8 +49,15 @@ export default function ProductDetails() {
   ];
 
   const handleAddToCart = () => {
-    // Handle add to cart logic
-    alert(`Added ${quantity} ${product.name} to cart`);
+    addItem({
+      id: parseInt(getParam(params.id)) || 1,
+      name: getParam(params.name) || product.name,
+      description: getParam(params.weight) || product.weight,
+      price: product.price,
+      icon: getParam(params.icon) || product.icon,
+      quantity,
+    });
+    router.push("/(tabs)/cart");
   };
 
   const decrementQuantity = () => {

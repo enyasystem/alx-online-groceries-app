@@ -128,6 +128,9 @@ export default function Cart() {
           paddingTop: 32,
         }}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: 120,
+        }}
       >
         <Text
           style={{
@@ -261,7 +264,12 @@ export default function Cart() {
 
       {/* Checkout Section */}
       <View
-        style={{ borderTopColor: "#E2E2E2", borderTopWidth: 1, padding: 20 }}
+        style={{
+          borderTopColor: "#E2E2E2",
+          borderTopWidth: 1,
+          padding: 20,
+          paddingBottom: 160,
+        }}
       >
         <View
           style={{
