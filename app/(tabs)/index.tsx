@@ -220,6 +220,7 @@ export default function Home() {
 
           {/* Search Bar */}
           <TouchableOpacity
+            onPress={() => router.push("/search")}
             style={{
               backgroundColor: "#F2F3F2",
               borderRadius: 12,
