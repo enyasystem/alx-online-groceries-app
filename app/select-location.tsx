@@ -52,7 +52,7 @@ export default function SelectLocation() {
 
   const handleSubmit = () => {
     if (selectedZone && selectedArea) {
-      router.replace("/(tabs)/index");
+      router.replace("/(tabs)");
     }
   };
 
