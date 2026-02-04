@@ -9,7 +9,7 @@ import {
     ScrollView,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from "react-native";
 
 const COUNTRIES = [
@@ -49,8 +49,8 @@ export default function SignIn() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
-        style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 24 }}
-        contentContainerStyle={{ flexGrow: 1 }}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 24, paddingBottom: 80 }}
       >
         {/* Hero Image */}
         <View
@@ -224,7 +224,9 @@ export default function SignIn() {
         />
 
         {/* Login/Signup Links */}
-        <View style={{ flexDirection: "row", justifyContent: "center", gap: 8 }}>
+        <View
+          style={{ flexDirection: "row", justifyContent: "center", gap: 8 }}
+        >
           <TouchableOpacity onPress={() => router.push("/login")}>
             <Text
               style={{

@@ -2,12 +2,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 export default function Login() {
@@ -25,7 +25,8 @@ export default function Login() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
-        style={{ flex: 1, paddingHorizontal: 20 }}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 24, paddingBottom: 80 }}
         keyboardShouldPersistTaps="handled"
       >
         {/* Carrot Icon */}

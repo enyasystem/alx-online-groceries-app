@@ -63,7 +63,8 @@ export default function VerifyOTP() {
 
         {/* Content */}
         <ScrollView
-          style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 32 }}
+          style={{ flex: 1 }}
+          contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 32, paddingBottom: 80 }}
           keyboardShouldPersistTaps="handled"
         >
           {/* Title */}

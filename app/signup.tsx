@@ -2,12 +2,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 export default function Signup() {
@@ -33,7 +33,8 @@ export default function Signup() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
-        style={{ flex: 1, paddingHorizontal: 20 }}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 24, paddingBottom: 80 }}
         keyboardShouldPersistTaps="handled"
       >
         {/* Carrot Icon */}
@@ -198,8 +199,8 @@ export default function Signup() {
             By continuing you agree to our{" "}
             <Text style={{ color: "#53B175", fontWeight: "600" }}>
               Terms of Service
-            </Text>
-            {" "}and{" "}
+            </Text>{" "}
+            and{" "}
             <Text style={{ color: "#53B175", fontWeight: "600" }}>
               Privacy Policy
             </Text>
@@ -211,15 +212,15 @@ export default function Signup() {
         <TouchableOpacity
           onPress={handleSignup}
           disabled={
-            !username.trim() || !email.trim() || !password.trim() || !isEmailValid
+            !username.trim() ||
+            !email.trim() ||
+            !password.trim() ||
+            !isEmailValid
           }
           style={{
             paddingVertical: 16,
             backgroundColor:
-              username.trim() &&
-              email.trim() &&
-              password.trim() &&
-              isEmailValid
+              username.trim() && email.trim() && password.trim() && isEmailValid
                 ? "#53B175"
                 : "#CCCCCC",
             borderRadius: 19,
