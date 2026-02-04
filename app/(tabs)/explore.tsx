@@ -69,9 +69,8 @@ export default function Explore() {
   ];
 
   const featuredCategories = categories.filter((cat) => cat.featured);
-  const regularCategories = categories.filter((cat) => !cat.featured);
 
-  const handleCategoryPress = (category) => {
+  const handleCategoryPress = (category: (typeof categories)[0]) => {
     router.push({
       pathname: "/explore",
       params: { category: category.name },
@@ -316,67 +315,65 @@ export default function Explore() {
               justifyContent: "space-between",
             }}
           >
-            {filteredCategories
-              .filter((cat) => !cat.featured)
-              .map((category) => (
-                <TouchableOpacity
-                  key={category.id}
-                  onPress={() => handleCategoryPress(category)}
-                  activeOpacity={0.8}
+            {filteredCategories.map((category) => (
+              <TouchableOpacity
+                key={category.id}
+                onPress={() => handleCategoryPress(category)}
+                activeOpacity={0.8}
+                style={{
+                  width: "48%",
+                  marginBottom: 16,
+                }}
+              >
+                <View
                   style={{
-                    width: "48%",
-                    marginBottom: 16,
+                    backgroundColor: category.color,
+                    borderRadius: 20,
+                    padding: 20,
+                    borderWidth: 1,
+                    borderColor: category.borderColor,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    minHeight: 180,
+                    shadowColor: category.borderColor,
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.15,
+                    shadowRadius: 8,
+                    elevation: 5,
                   }}
                 >
-                  <View
+                  {/* Icon */}
+                  <Text style={{ fontSize: 56, marginBottom: 10 }}>
+                    {category.icon}
+                  </Text>
+
+                  {/* Category Name */}
+                  <Text
                     style={{
-                      backgroundColor: category.color,
-                      borderRadius: 20,
-                      padding: 20,
-                      borderWidth: 1,
-                      borderColor: category.borderColor,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      minHeight: 180,
-                      shadowColor: category.borderColor,
-                      shadowOffset: { width: 0, height: 4 },
-                      shadowOpacity: 0.15,
-                      shadowRadius: 8,
-                      elevation: 5,
+                      fontSize: 13,
+                      fontWeight: "700",
+                      color: "#181725",
+                      textAlign: "center",
+                      lineHeight: 18,
+                      marginBottom: 6,
                     }}
                   >
-                    {/* Icon */}
-                    <Text style={{ fontSize: 56, marginBottom: 10 }}>
-                      {category.icon}
-                    </Text>
+                    {category.name}
+                  </Text>
 
-                    {/* Category Name */}
-                    <Text
-                      style={{
-                        fontSize: 13,
-                        fontWeight: "700",
-                        color: "#181725",
-                        textAlign: "center",
-                        lineHeight: 18,
-                        marginBottom: 6,
-                      }}
-                    >
-                      {category.name}
-                    </Text>
-
-                    {/* Product Count */}
-                    <Text
-                      style={{
-                        fontSize: 11,
-                        color: "#7C7C7C",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {category.productCount} items
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
+                  {/* Product Count */}
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      color: "#7C7C7C",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {category.productCount} items
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
       </ScrollView>
