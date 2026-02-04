@@ -20,12 +20,13 @@ export default function CheckoutCard({
   const total = subtotal + delivery;
 
   const handlePlaceOrder = () => {
-    // clear the cart, close modal (animated) then navigate to order accepted
-    clearCart();
+    // Close modal first, then navigate to order accepted and clear the cart.
     if (onClose) onClose();
     // wait a short moment to allow modal close animation to run
     setTimeout(() => {
       router.push({ pathname: "/order-accepted" });
+      // clear cart after navigation starts so the cart screen isn't shown empty behind modal
+      clearCart();
     }, 550);
   };
 
