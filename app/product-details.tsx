@@ -45,6 +45,9 @@ export default function ProductDetails() {
     quantity: 50,
   };
 
+  const categoryParam = getParam(params.category);
+  const productKey = categoryParam ? `${categoryParam}-${product.id}` : `${product.id}`;
+
   const relatedProducts = [
     { id: 2, name: "Red Apple", price: 4999, icon: "🍎" },
     { id: 3, name: "Carrot", price: 1750, icon: "🥕" },
@@ -131,14 +134,14 @@ export default function ProductDetails() {
               setIsFavorite(newFavoriteState);
               if (newFavoriteState) {
                 addFavorite({
-                  id: product.id,
+                  id: productKey,
                   name: product.name,
                   description: product.weight,
                   price: product.price,
                   image: product.icon,
                 });
               } else {
-                removeFavorite(product.id);
+                removeFavorite(productKey);
               }
             }}
           >
@@ -176,7 +179,7 @@ export default function ProductDetails() {
 
             <View style={{ position: "absolute", top: 12, right: 12 }}>
               <FavoriteBadge
-                productId={product.id}
+                productKey={productKey}
                 productName={product.name}
                 productDescription={product.weight}
                 productPrice={product.price}

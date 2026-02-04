@@ -524,7 +524,7 @@ export default function CategoryProducts() {
                   pointerEvents="box-none"
                 >
                   <FavoriteBadge
-                    productId={product.id}
+                    productKey={`${categoryName}-${product.id}`}
                     productName={product.name}
                     productDescription={product.size}
                     productPrice={product.price}

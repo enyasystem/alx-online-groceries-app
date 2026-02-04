@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 export interface FavoriteItem {
-  id: number;
+  id: string; // composite key: `${category}-${id}` to avoid id collisions across categories
   name: string;
   description: string;
   price: number;
@@ -11,8 +11,8 @@ export interface FavoriteItem {
 interface FavoritesContextType {
   favorites: FavoriteItem[];
   addFavorite: (item: FavoriteItem) => void;
-  removeFavorite: (id: number) => void;
-  isFavorite: (id: number) => boolean;
+  removeFavorite: (id: string) => void;
+  isFavorite: (id: string) => boolean;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(
@@ -30,11 +30,11 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const removeFavorite = (id: number) => {
+  const removeFavorite = (id: string) => {
     setFavorites((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const isFavorite = (id: number) => {
+  const isFavorite = (id: string) => {
     return favorites.some((item) => item.id === id);
   };
 

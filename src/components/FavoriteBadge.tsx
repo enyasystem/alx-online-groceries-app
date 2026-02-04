@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { useFavorites } from "../context/FavoritesContext";
 
 interface FavoriteBadgeProps {
-  productId: number;
+  productKey: string; // composite key `${category}-${id}`
   productName: string;
   productDescription: string;
   productPrice: number;
@@ -11,21 +11,21 @@ interface FavoriteBadgeProps {
 }
 
 export default function FavoriteBadge({
-  productId,
+  productKey,
   productName,
   productDescription,
   productPrice,
   productImage,
 }: FavoriteBadgeProps) {
   const { isFavorite, addFavorite, removeFavorite } = useFavorites();
-  const isLiked = isFavorite(productId);
+  const isLiked = isFavorite(productKey);
 
   const handleToggleFavorite = () => {
     if (isLiked) {
-      removeFavorite(productId);
+      removeFavorite(productKey);
     } else {
       addFavorite({
-        id: productId,
+        id: productKey,
         name: productName,
         description: productDescription,
         price: productPrice,
