@@ -7,7 +7,7 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { useAuth } from "../../src/context/AuthContext";
 
@@ -114,23 +114,33 @@ export default function Home() {
     return () => clearInterval(promoInterval);
   }, [isAutoScrolling, promos.length]);
 
-  // Auto-scroll for offers carousel
+  // Auto-scroll for offers carousel - Marquee/Ticker effect
   useEffect(() => {
-    if (!isAutoScrolling || !carouselRef.current) return;
+    const totalWidth = exclusiveOffers.length * (cardWidth + cardMargin);
+    let scrollPosition = 0;
 
-    const offerInterval = setInterval(() => {
-      setCurrentOfferIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % exclusiveOffers.length;
-        carouselRef.current?.scrollTo({
-          x: nextIndex * (cardWidth + cardMargin),
-          animated: true,
-        });
-        return nextIndex;
+    const scrollInterval = setInterval(() => {
+      scrollPosition += 2; // Pixels per tick
+
+      // Loop back to start when reaching the end
+      if (scrollPosition > totalWidth) {
+        scrollPosition = 0;
+      }
+
+      carouselRef.current?.scrollTo({
+        x: scrollPosition,
+        animated: false,
       });
-    }, 5000);
 
-    return () => clearInterval(offerInterval);
-  }, [isAutoScrolling, exclusiveOffers.length]);
+      // Update index indicator for dot navigation
+      const index =
+        Math.floor(scrollPosition / (cardWidth + cardMargin)) %
+        exclusiveOffers.length;
+      setCurrentOfferIndex(index);
+    }, 30); // Smooth 30ms intervals
+
+    return () => clearInterval(scrollInterval);
+  }, [cardWidth, cardMargin, exclusiveOffers.length]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -387,14 +397,8 @@ export default function Home() {
             horizontal
             showsHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
-            onMomentumScrollEnd={(event) => {
-              const index = Math.round(
-                event.nativeEvent.contentOffset.x / (cardWidth + cardMargin),
-              );
-              setCurrentOfferIndex(index % exclusiveOffers.length);
-              setIsAutoScrolling(true);
-            }}
-            onScrollBeginDrag={() => setIsAutoScrolling(false)}
+            scrollsToTop={false}
+            nestedScrollEnabled={true}
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
