@@ -8,9 +8,8 @@ import {
     SafeAreaView,
     ScrollView,
     Text,
-    TextInput,
     TouchableOpacity,
-    View,
+    View
 } from "react-native";
 
 const COUNTRIES = [

@@ -153,7 +153,6 @@ export default function EnterPhoneNumber() {
               <TextInput
                 placeholder="0912345678"
                 placeholderTextColor="#CCCCCC"
-                keyboardType="none"
                 value={phoneNumber}
                 editable={false}
                 style={{
@@ -170,9 +169,9 @@ export default function EnterPhoneNumber() {
         {/* Numeric Keypad */}
         <View
           style={{
-            paddingHorizontal: 16,
-            paddingBottom: 24,
-            paddingTop: 16,
+            paddingHorizontal: 12,
+            paddingVertical: 12,
+            backgroundColor: "#F7F7F7",
           }}
         >
           {KEYPAD_KEYS.map((row, rowIndex) => (
@@ -181,7 +180,7 @@ export default function EnterPhoneNumber() {
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
-                marginBottom: 16,
+                marginBottom: 12,
               }}
             >
               {row.map((key) => (
@@ -190,19 +189,20 @@ export default function EnterPhoneNumber() {
                   onPress={() => handleKeyPress(key)}
                   style={{
                     flex: 1,
-                    marginHorizontal: 6,
-                    paddingVertical: 18,
+                    marginHorizontal: 4,
+                    paddingVertical: 16,
                     backgroundColor: "#fff",
-                    borderColor: "#E2E2E2",
+                    borderColor: "#E8E8E8",
                     borderWidth: 1,
-                    borderRadius: 14,
+                    borderRadius: 16,
                     alignItems: "center",
                     justifyContent: "center",
+                    position: "relative",
                   }}
                 >
                   <Text
                     style={{
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: "600",
                       color: "#181725",
                     }}
@@ -210,42 +210,58 @@ export default function EnterPhoneNumber() {
                     {key}
                   </Text>
                   {key === "2" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       ABC
                     </Text>
                   )}
                   {key === "3" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       DEF
                     </Text>
                   )}
                   {key === "4" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       GHI
                     </Text>
                   )}
                   {key === "5" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       JKL
                     </Text>
                   )}
                   {key === "6" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       MNO
                     </Text>
                   )}
                   {key === "7" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       PQRS
                     </Text>
                   )}
                   {key === "8" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       TUV
                     </Text>
                   )}
                   {key === "9" && (
-                    <Text style={{ fontSize: 12, color: "#999", marginTop: 2 }}>
+                    <Text
+                      style={{ fontSize: 11, color: "#AAAAAA", marginTop: 4 }}
+                    >
                       WXYZ
                     </Text>
                   )}
@@ -255,49 +271,35 @@ export default function EnterPhoneNumber() {
           ))}
         </View>
 
-        {/* Continue Button */}
+        {/* Continue Button - Below Keypad */}
         <View
           style={{
-            position: "absolute",
-            bottom: 100,
-            right: 16,
+            paddingHorizontal: 12,
+            paddingVertical: 16,
+            alignItems: "flex-end",
+            backgroundColor: "#F7F7F7",
           }}
         >
           <TouchableOpacity
             onPress={handleContinue}
             disabled={phoneNumber.trim().length < 10}
             style={{
-              width: 64,
-              height: 64,
-              borderRadius: 32,
+              width: 56,
+              height: 56,
+              borderRadius: 28,
               backgroundColor: "#53B175",
               alignItems: "center",
               justifyContent: "center",
-              elevation: 6,
+              elevation: 5,
               shadowColor: "#53B175",
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.3,
-              shadowRadius: 8,
+              shadowOffset: { width: 0, height: 3 },
+              shadowOpacity: 0.25,
+              shadowRadius: 6,
             }}
           >
-            <MaterialIcons
-              name="chevron-right"
-              size={32}
-              color="#fff"
-            />
+            <MaterialIcons name="chevron-right" size={28} color="#fff" />
           </TouchableOpacity>
         </View>
-
-        {/* Loading Bar */}
-        <View
-          style={{
-            height: 3,
-            backgroundColor: "#E2E2E2",
-            marginHorizontal: 40,
-            marginBottom: 20,
-            borderRadius: 2,
-          }}
-        />
       </View>
 
       {/* Country Picker Modal */}
