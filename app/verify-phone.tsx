@@ -259,32 +259,31 @@ export default function EnterPhoneNumber() {
         <View
           style={{
             position: "absolute",
-            bottom: 80,
-            right: 20,
+            bottom: 100,
+            right: 16,
           }}
         >
           <TouchableOpacity
             onPress={handleContinue}
             disabled={phoneNumber.trim().length < 10}
             style={{
-              width: 60,
-              height: 60,
-              borderRadius: 30,
-              backgroundColor:
-                phoneNumber.trim().length >= 10 ? "#53B175" : "#E8E8E8",
+              width: 64,
+              height: 64,
+              borderRadius: 32,
+              backgroundColor: "#53B175",
               alignItems: "center",
               justifyContent: "center",
-              elevation: 4,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.15,
-              shadowRadius: 4,
+              elevation: 6,
+              shadowColor: "#53B175",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.3,
+              shadowRadius: 8,
             }}
           >
             <MaterialIcons
               name="chevron-right"
-              size={28}
-              color={phoneNumber.trim().length >= 10 ? "#fff" : "#999"}
+              size={32}
+              color="#fff"
             />
           </TouchableOpacity>
         </View>
