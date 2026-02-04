@@ -4,7 +4,7 @@ import {
     ScrollView,
     Text,
     TouchableOpacity,
-    View
+    View,
 } from "react-native";
 
 export default function Home() {
@@ -62,11 +62,11 @@ export default function Home() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={{ paddingBottom: 100 }}
       >
         {/* Header with Location and Search */}
         <View
-          style={{ paddingHorizontal: 20, paddingTop: 12, paddingBottom: 8 }}
+          style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 12 }}
         >
           <View
             style={{
