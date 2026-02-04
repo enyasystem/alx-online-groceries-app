@@ -14,7 +14,33 @@ export default function Home() {
   const router = useRouter();
   const { user } = useAuth();
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
+  const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
   const carouselRef = useRef(null);
+  const promoRef = useRef(null);
+
+  const promos = [
+    {
+      id: 1,
+      title: "Fresh Vegetables",
+      subtitle: "Get Up To 40% OFF",
+      icon: "🥕",
+      bgColor: "#53B175",
+    },
+    {
+      id: 2,
+      title: "Organic Fruits",
+      subtitle: "Get Up To 35% OFF",
+      icon: "🍎",
+      bgColor: "#E74C3C",
+    },
+    {
+      id: 3,
+      title: "Fresh Dairy",
+      subtitle: "Get Up To 25% OFF",
+      icon: "🧈",
+      bgColor: "#F39C12",
+    },
+  ];
   const categories = [
     { id: 1, name: "Vegetables", icon: "🥬", color: "#E8F5E9" },
     { id: 2, name: "Fruits", icon: "🍎", color: "#FCE4EC" },
@@ -143,36 +169,93 @@ export default function Home() {
           </TouchableOpacity>
         </View>
 
-        {/* Promo Banner */}
-        <View style={{ paddingHorizontal: 20, marginVertical: 20 }}>
-          <View
-            style={{
-              backgroundColor: "#53B175",
-              borderRadius: 16,
-              overflow: "hidden",
-              minHeight: 140,
-              justifyContent: "space-between",
-              padding: 16,
-              flexDirection: "row",
-              alignItems: "center",
+        {/* Promo Banner - Carousel */}
+        <View style={{ marginVertical: 20 }}>
+          <ScrollView
+            ref={promoRef}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            onMomentumScrollEnd={(event) => {
+              const index = Math.round(
+                event.nativeEvent.contentOffset.x / (400 + 12),
+              );
+              setCurrentPromoIndex(index % promos.length);
             }}
+            style={{ marginHorizontal: -20 }}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
           >
-            <View style={{ flex: 1 }}>
-              <Text
+            {promos.map((promo) => (
+              <TouchableOpacity
+                key={promo.id}
                 style={{
-                  fontSize: 26,
-                  fontWeight: "700",
-                  color: "#fff",
-                  marginBottom: 6,
+                  backgroundColor: promo.bgColor,
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  minHeight: 160,
+                  justifyContent: "space-between",
+                  padding: 24,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  width: 380,
+                  marginRight: 12,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.15,
+                  shadowRadius: 12,
+                  elevation: 5,
                 }}
               >
-                Fresh Vegetables
-              </Text>
-              <Text style={{ fontSize: 14, color: "rgba(255,255,255,0.9)" }}>
-                Get Up To 40% OFF
-              </Text>
-            </View>
-            <Text style={{ fontSize: 80 }}>🥕</Text>
+                <View style={{ flex: 1 }}>
+                  <Text
+                    style={{
+                      fontSize: 24,
+                      fontWeight: "700",
+                      color: "#fff",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {promo.title}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: "rgba(255,255,255,0.9)",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {promo.subtitle}
+                  </Text>
+                </View>
+                <Text style={{ fontSize: 80, marginLeft: 16 }}>
+                  {promo.icon}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+
+          {/* Promo Carousel Indicators */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: 16,
+              paddingHorizontal: 20,
+            }}
+          >
+            {promos.map((_, index) => (
+              <View
+                key={index}
+                style={{
+                  width: currentPromoIndex === index ? 28 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  backgroundColor:
+                    currentPromoIndex === index ? "#53B175" : "#E2E2E2",
+                  marginHorizontal: 4,
+                }}
+              />
+            ))}
           </View>
         </View>
 
@@ -262,7 +345,7 @@ export default function Home() {
             scrollEventThrottle={16}
             onMomentumScrollEnd={(event) => {
               const index = Math.round(
-                event.nativeEvent.contentOffset.x / (400 + 12)
+                event.nativeEvent.contentOffset.x / (400 + 12),
               );
               setCurrentOfferIndex(index % exclusiveOffers.length);
             }}
