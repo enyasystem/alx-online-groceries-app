@@ -1,11 +1,11 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import {
-    SafeAreaView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { Path, Svg } from "react-native-svg";
 
@@ -43,29 +43,53 @@ export default function OrderAccepted() {
             </View>
           </View>
 
-          {/* Decorative small dots */}
+          {/* Decorative dots placed outside the circle with varied sizes */}
           <View
             style={[
               styles.confettiDot,
-              { backgroundColor: "#53B175", left: 40, top: 8 },
+              {
+                backgroundColor: "#53B175",
+                left: -10,
+                top: -10,
+                width: 10,
+                height: 10,
+              },
             ]}
           />
           <View
             style={[
               styles.confettiDot,
-              { backgroundColor: "#F2994A", right: 36, top: 18 },
+              {
+                backgroundColor: "#F2994A",
+                right: -12,
+                top: -6,
+                width: 8,
+                height: 8,
+              },
             ]}
           />
           <View
             style={[
               styles.confettiDot,
-              { backgroundColor: "#6FCF97", left: 24, bottom: 22 },
+              {
+                backgroundColor: "#6FCF97",
+                left: -6,
+                bottom: -8,
+                width: 9,
+                height: 9,
+              },
             ]}
           />
           <View
             style={[
               styles.confettiDot,
-              { backgroundColor: "#56CCF2", right: 44, bottom: 40 },
+              {
+                backgroundColor: "#56CCF2",
+                right: -8,
+                bottom: -14,
+                width: 7,
+                height: 7,
+              },
             ]}
           />
         </View>
@@ -123,35 +147,36 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   iconWrap: {
-    width: 200,
-    height: 200,
+    width: 180,
+    height: 180,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 24,
   },
   outerCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+    width: 180,
+    height: 180,
+    borderRadius: 90,
     backgroundColor: "#53B175",
     alignItems: "center",
     justifyContent: "center",
     elevation: 6,
   },
   innerRing: {
-    width: 160,
-    height: 160,
-    borderRadius: 80,
+    width: 156,
+    height: 156,
+    borderRadius: 78,
     borderWidth: 3,
     borderColor: "rgba(255,255,255,0.35)",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
+    transform: [{ translateY: -2 }],
   },
   checkWrap: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
     backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
