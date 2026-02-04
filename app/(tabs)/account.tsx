@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import {
     SafeAreaView,
     ScrollView,
@@ -5,11 +6,25 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useAuth } from "../../src/context/AuthContext";
 
 export default function Account() {
+  const router = useRouter();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.replace("/onboarding");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 16 }}
       >
         <Text
@@ -23,10 +38,10 @@ export default function Account() {
           My Account
         </Text>
 
-        {/* Profile Section */}
+        {/* User Info Section */}
         <View
           style={{
-            backgroundColor: "#F7F7F7",
+            backgroundColor: "#F2F3F2",
             padding: 16,
             borderRadius: 12,
             marginBottom: 20,
@@ -37,13 +52,16 @@ export default function Account() {
               fontSize: 18,
               fontWeight: "600",
               color: "#181725",
-              marginBottom: 8,
+              marginBottom: 4,
             }}
           >
-            👤 Profile
+            👤 {user?.name || "User Account"}
           </Text>
-          <Text style={{ fontSize: 14, color: "#7C7C7C" }}>
-            Manage your profile and preferences
+          <Text style={{ fontSize: 13, color: "#7C7C7C", marginBottom: 8 }}>
+            {user?.phone || "Phone not available"}
+          </Text>
+          <Text style={{ fontSize: 13, color: "#7C7C7C" }}>
+            {user?.location || "Location not set"}
           </Text>
         </View>
 
@@ -81,12 +99,14 @@ export default function Account() {
 
         {/* Sign Out */}
         <TouchableOpacity
+          onPress={handleLogout}
           style={{
             backgroundColor: "#F44336",
             paddingVertical: 14,
             borderRadius: 12,
             alignItems: "center",
             marginTop: 20,
+            marginBottom: 20,
           }}
         >
           <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>

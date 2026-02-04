@@ -2,15 +2,16 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    FlatList,
-    Image,
-    Modal,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Image,
+  Modal,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import { useAuth } from "../src/context/AuthContext";
 
 const COUNTRIES = [
   { code: "+234", name: "Nigeria", flag: "🇳🇬" },
@@ -27,18 +28,49 @@ const COUNTRIES = [
 
 export default function SignIn() {
   const router = useRouter();
+  const { signIn } = useAuth();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [showCountryModal, setShowCountryModal] = useState(false);
 
-  const handleGoogleSignIn = () => {
-    // Handle Google sign in
-    router.push("/verify-phone");
+  const handleGoogleSignIn = async () => {
+    // Handle Google sign in - save session
+    try {
+      const userData = {
+        id: "1",
+        name: "User",
+        email: "user@example.com",
+        phone: selectedCountry.code + phoneNumber,
+        location: "Not set",
+      };
+      await signIn(userData);
+      router.replace({
+        pathname: "/select-location",
+        params: { userData: JSON.stringify(userData) },
+      });
+    } catch (error) {
+      console.error("Sign in error:", error);
+    }
   };
 
-  const handleFacebookSignIn = () => {
-    // Handle Facebook sign in
-    router.push("/verify-phone");
+  const handleFacebookSignIn = async () => {
+    // Handle Facebook sign in - save session
+    try {
+      const userData = {
+        id: "1",
+        name: "User",
+        email: "user@example.com",
+        phone: selectedCountry.code + phoneNumber,
+        location: "Not set",
+      };
+      await signIn(userData);
+      router.replace({
+        pathname: "/select-location",
+        params: { userData: JSON.stringify(userData) },
+      });
+    } catch (error) {
+      console.error("Sign in error:", error);
+    }
   };
 
   const handleSelectCountry = (country: (typeof COUNTRIES)[0]) => {

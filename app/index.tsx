@@ -1,9 +1,11 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Animated, SafeAreaView, Text, View } from "react-native";
+import { useAuth } from "../src/context/AuthContext";
 
 export default function SplashScreen() {
   const router = useRouter();
+  const { isSignedIn, isLoading } = useAuth();
   const [progress] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -16,11 +18,17 @@ export default function SplashScreen() {
 
     // Navigate after 2.5 seconds
     const timer = setTimeout(() => {
-      router.replace("/onboarding");
+      if (isLoading) return;
+
+      if (isSignedIn) {
+        router.replace("/(tabs)");
+      } else {
+        router.replace("/onboarding");
+      }
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, [router, progress]);
+  }, [router, progress, isSignedIn, isLoading]);
 
   const progressWidth = progress.interpolate({
     inputRange: [0, 1],

@@ -1,15 +1,17 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    FlatList,
-    Modal,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Modal,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import { useAuth } from "../src/context/AuthContext";
 
 const NIGERIAN_ZONES = [
   { id: 1, name: "Lagos" },
@@ -33,12 +35,20 @@ const AREA_TYPES = [
 
 export default function SelectLocation() {
   const router = useRouter();
+  const route = useRoute();
+  const { user, signIn } = useAuth();
   const [selectedZone, setSelectedZone] = useState(NIGERIAN_ZONES[0]);
   const [selectedArea, setSelectedArea] = useState<
     (typeof AREA_TYPES)[0] | null
   >(null);
   const [showZoneModal, setShowZoneModal] = useState(false);
   const [showAreaModal, setShowAreaModal] = useState(false);
+
+  // Get user from route params or context
+  const routeParams = route.params as { userData?: string } | undefined;
+  const contextUser = user;
+  const passedUser = routeParams?.userData ? JSON.parse(routeParams.userData) : null;
+  const currentUser = contextUser || passedUser;
 
   const handleSelectZone = (zone: (typeof NIGERIAN_ZONES)[0]) => {
     setSelectedZone(zone);
@@ -50,9 +60,34 @@ export default function SelectLocation() {
     setShowAreaModal(false);
   };
 
-  const handleSubmit = () => {
-    if (selectedZone && selectedArea) {
+  const handleSubmit = async () => {
+    if (!selectedZone) {
+      console.error("No zone selected");
+      return;
+    }
+    if (!selectedArea) {
+      console.error("No area selected");
+      return;
+    }
+
+    try {
+      // Use current user (from context or params)
+      const updatedUser = currentUser || {
+        id: "1",
+        name: "User",
+        email: "user@example.com",
+        phone: "+234",
+        location: "",
+      };
+      
+      updatedUser.location = `${selectedZone.name}, ${selectedArea.name}`;
+      
+      console.log("Updating user with location:", updatedUser);
+      await signIn(updatedUser);
+      console.log("User updated, navigating to tabs");
       router.replace("/(tabs)");
+    } catch (error) {
+      console.error("Error updating location:", error);
     }
   };
 
