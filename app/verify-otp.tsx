@@ -2,28 +2,12 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    FlatList,
-    Modal,
     SafeAreaView,
     ScrollView,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
-
-const COUNTRIES = [
-  { code: "+234", name: "Nigeria", flag: "🇳🇬" },
-  { code: "+1", name: "United States", flag: "🇺🇸" },
-  { code: "+44", name: "United Kingdom", flag: "🇬🇧" },
-  { code: "+91", name: "India", flag: "🇮🇳" },
-  { code: "+86", name: "China", flag: "🇨🇳" },
-  { code: "+33", name: "France", flag: "🇫🇷" },
-  { code: "+49", name: "Germany", flag: "🇩🇪" },
-  { code: "+39", name: "Italy", flag: "🇮🇹" },
-  { code: "+81", name: "Japan", flag: "🇯🇵" },
-  { code: "+61", name: "Australia", flag: "🇦🇺" },
-];
 
 const KEYPAD_KEYS = [
   ["1", "2", "3"],
@@ -32,29 +16,27 @@ const KEYPAD_KEYS = [
   ["+", "0", "⌫"],
 ];
 
-export default function EnterPhoneNumber() {
+export default function VerifyOTP() {
   const router = useRouter();
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
-  const [showCountryModal, setShowCountryModal] = useState(false);
+  const [code, setCode] = useState("");
 
   const handleKeyPress = (key: string) => {
     if (key === "⌫") {
-      setPhoneNumber(phoneNumber.slice(0, -1));
-    } else {
-      setPhoneNumber(phoneNumber + key);
+      setCode(code.slice(0, -1));
+    } else if (code.length < 4) {
+      setCode(code + key);
     }
   };
 
   const handleContinue = () => {
-    if (phoneNumber.trim().length >= 10) {
-      router.push("/verify-otp");
+    if (code.length === 4) {
+      router.push("/(tabs)/index");
     }
   };
 
-  const handleSelectCountry = (country: (typeof COUNTRIES)[0]) => {
-    setSelectedCountry(country);
-    setShowCountryModal(false);
+  const handleResendCode = () => {
+    setCode("");
+    // TODO: Trigger resend code API
   };
 
   return (
@@ -94,7 +76,7 @@ export default function EnterPhoneNumber() {
               lineHeight: 36,
             }}
           >
-            Enter your{"\n"}mobile number
+            Enter your{"\n"}4-digit code
           </Text>
 
           {/* Label */}
@@ -102,68 +84,60 @@ export default function EnterPhoneNumber() {
             style={{
               fontSize: 12,
               color: "#7C7C7C",
-              marginBottom: 8,
+              marginBottom: 16,
               fontWeight: "500",
               letterSpacing: 0.5,
             }}
           >
-            Mobile Number
+            Code
           </Text>
 
-          {/* Phone Number Input */}
+          {/* Code Display */}
           <View
             style={{
-              borderBottomColor: "#E2E2E2",
-              borderBottomWidth: 2,
+              flexDirection: "row",
+              justifyContent: "space-between",
               marginBottom: 80,
             }}
           >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                paddingVertical: 8,
-              }}
-            >
-              {/* Country Selector */}
-              <TouchableOpacity
-                onPress={() => setShowCountryModal(true)}
+            {[0, 1, 2, 3].map((index) => (
+              <View
+                key={index}
                 style={{
-                  flexDirection: "row",
+                  width: 60,
+                  height: 60,
+                  borderBottomColor: "#181725",
+                  borderBottomWidth: 2,
                   alignItems: "center",
-                  marginRight: 12,
+                  justifyContent: "center",
                 }}
               >
-                <Text style={{ fontSize: 24, marginRight: 8 }}>
-                  {selectedCountry.flag}
-                </Text>
                 <Text
                   style={{
-                    fontSize: 16,
-                    fontWeight: "700",
+                    fontSize: 28,
+                    fontWeight: "600",
                     color: "#181725",
-                    marginRight: 4,
+                    letterSpacing: 12,
                   }}
                 >
-                  {selectedCountry.code}
+                  {code[index] ? code[index] : "|"}
                 </Text>
-              </TouchableOpacity>
-
-              {/* Phone Input */}
-              <TextInput
-                placeholder="0912345678"
-                placeholderTextColor="#CCCCCC"
-                value={phoneNumber}
-                editable={false}
-                style={{
-                  flex: 1,
-                  fontSize: 16,
-                  color: "#181725",
-                  paddingVertical: 8,
-                }}
-              />
-            </View>
+              </View>
+            ))}
           </View>
+
+          {/* Resend Code */}
+          <TouchableOpacity onPress={handleResendCode}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "600",
+                color: "#53B175",
+              }}
+            >
+              Resend Code
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
 
         {/* Numeric Keypad */}
@@ -197,7 +171,6 @@ export default function EnterPhoneNumber() {
                     borderRadius: 16,
                     alignItems: "center",
                     justifyContent: "center",
-                    position: "relative",
                   }}
                 >
                   <Text
@@ -282,12 +255,12 @@ export default function EnterPhoneNumber() {
         >
           <TouchableOpacity
             onPress={handleContinue}
-            disabled={phoneNumber.trim().length < 10}
+            disabled={code.length < 4}
             style={{
               width: 56,
               height: 56,
               borderRadius: 28,
-              backgroundColor: "#53B175",
+              backgroundColor: code.length === 4 ? "#53B175" : "#CCCCCC",
               alignItems: "center",
               justifyContent: "center",
               elevation: 5,
@@ -301,108 +274,6 @@ export default function EnterPhoneNumber() {
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Country Picker Modal */}
-      <Modal
-        visible={showCountryModal}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setShowCountryModal(false)}
-      >
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            justifyContent: "flex-end",
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: "#fff",
-              borderTopLeftRadius: 24,
-              borderTopRightRadius: 24,
-              maxHeight: "80%",
-            }}
-          >
-            {/* Header */}
-            <View
-              style={{
-                padding: 20,
-                borderBottomColor: "#E2E2E2",
-                borderBottomWidth: 1,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "600",
-                  color: "#181725",
-                }}
-              >
-                Select Country
-              </Text>
-              <TouchableOpacity onPress={() => setShowCountryModal(false)}>
-                <MaterialIcons name="close" size={24} color="#181725" />
-              </TouchableOpacity>
-            </View>
-
-            {/* Country List */}
-            <FlatList
-              data={COUNTRIES}
-              keyExtractor={(item) => item.code}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() => handleSelectCountry(item)}
-                  style={{
-                    paddingVertical: 16,
-                    paddingHorizontal: 20,
-                    borderBottomColor: "#F0F0F0",
-                    borderBottomWidth: 1,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    backgroundColor:
-                      selectedCountry.code === item.code ? "#F0F0F0" : "#fff",
-                  }}
-                >
-                  <Text style={{ fontSize: 20, marginRight: 12 }}>
-                    {item.flag}
-                  </Text>
-                  <View style={{ flex: 1 }}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: "500",
-                        color: "#181725",
-                      }}
-                    >
-                      {item.name}
-                    </Text>
-                  </View>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      color: "#7C7C7C",
-                      marginRight: 8,
-                    }}
-                  >
-                    {item.code}
-                  </Text>
-                  {selectedCountry.code === item.code && (
-                    <MaterialIcons
-                      name="check-circle"
-                      size={24}
-                      color="#53B175"
-                    />
-                  )}
-                </TouchableOpacity>
-              )}
-            />
-          </View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 }
