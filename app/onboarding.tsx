@@ -1,5 +1,11 @@
 import { useRouter } from "expo-router";
-import { SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
+import {
+    Image,
+    SafeAreaView,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
 export default function Onboarding() {
   const router = useRouter();
