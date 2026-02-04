@@ -30,7 +30,7 @@ export default function VerifyOTP() {
 
   const handleContinue = () => {
     if (code.length === 4) {
-      router.push("/(tabs)/index");
+      router.push("/select-location");
     }
   };
 
