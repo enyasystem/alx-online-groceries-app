@@ -59,7 +59,7 @@ export default function Home() {
       id: 1,
       name: "Organic Bananas",
       details: "7pcs, Priceg",
-      price: "$4.99",
+      price: "₦2,499",
       icon: "🍌",
       bgColor: "#FEF5E7",
     },
@@ -67,7 +67,7 @@ export default function Home() {
       id: 2,
       name: "Red Apple",
       details: "1kg, Priceg",
-      price: "$4.99",
+      price: "₦2,499",
       icon: "🍎",
       bgColor: "#FADBD8",
     },
@@ -75,7 +75,7 @@ export default function Home() {
       id: 3,
       name: "Carrot",
       details: "1kg, Priceg",
-      price: "$3.99",
+      price: "₦1,999",
       icon: "🥕",
       bgColor: "#FDC79B",
     },
@@ -83,17 +83,17 @@ export default function Home() {
       id: 4,
       name: "Bell Pepper",
       details: "1kg, Priceg",
-      price: "$2.99",
+      price: "₦1,499",
       icon: "🫑",
       bgColor: "#FADBD8",
     },
   ];
 
   const bestSelling = [
-    { id: 1, name: "Tomato", weight: "1kg", price: "$4.99", icon: "🍅" },
-    { id: 2, name: "Onion", weight: "1kg", price: "$3.99", icon: "🧅" },
-    { id: 3, name: "Lettuce", weight: "500g", price: "$2.99", icon: "🥬" },
-    { id: 4, name: "Spinach", weight: "500g", price: "$2.49", icon: "🥬" },
+    { id: 1, name: "Tomato", weight: "1kg", price: "₦2,499", icon: "🍅" },
+    { id: 2, name: "Onion", weight: "1kg", price: "₦1,999", icon: "🧅" },
+    { id: 3, name: "Lettuce", weight: "500g", price: "₦1,499", icon: "🥬" },
+    { id: 4, name: "Spinach", weight: "500g", price: "₦1,249", icon: "🥬" },
   ];
 
   // Auto-scroll for promo carousel
@@ -399,6 +399,7 @@ export default function Home() {
             scrollEventThrottle={16}
             scrollsToTop={false}
             nestedScrollEnabled={true}
+            scrollEnabled={true}
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
