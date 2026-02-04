@@ -144,7 +144,7 @@ export default function Home() {
     }, 16); // 16ms for smooth 60fps
 
     return () => clearInterval(scrollInterval);
-  }, [cardWidth, cardMargin, exclusiveOffers.length, isOfferScrolling]);
+  }, [exclusiveOffers.length, isOfferScrolling]);
 
   // Resume auto-scroll after user finishes dragging
   useEffect(() => {
