@@ -1,4 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import {
   SafeAreaView,
   ScrollView,
@@ -8,6 +9,7 @@ import {
 } from "react-native";
 
 export default function Home() {
+  const router = useRouter();
   const categories = [
     { id: 1, name: "Vegetables", icon: "🥬", color: "#E8F5E9" },
     { id: 2, name: "Fruits", icon: "🍎", color: "#FCE4EC" },
@@ -242,6 +244,18 @@ export default function Home() {
             {exclusiveOffers.slice(0, 2).map((offer) => (
               <TouchableOpacity
                 key={offer.id}
+                onPress={() =>
+                  router.push({
+                    pathname: "/product-details",
+                    params: {
+                      id: offer.id,
+                      name: offer.name,
+                      price: offer.price,
+                      icon: offer.icon,
+                      details: offer.details,
+                    },
+                  })
+                }
                 style={{
                   backgroundColor: offer.bgColor,
                   borderRadius: 16,
@@ -302,8 +316,20 @@ export default function Home() {
 
           <View>
             {bestSelling.slice(0, 2).map((item) => (
-              <View
+              <TouchableOpacity
                 key={item.id}
+                onPress={() =>
+                  router.push({
+                    pathname: "/product-details",
+                    params: {
+                      id: item.id,
+                      name: item.name,
+                      price: item.price,
+                      weight: item.weight,
+                      icon: item.icon,
+                    },
+                  })
+                }
                 style={{
                   backgroundColor: "#F7F7F7",
                   borderRadius: 12,
@@ -363,6 +389,18 @@ export default function Home() {
                     {item.price}
                   </Text>
                   <TouchableOpacity
+                    onPress={() =>
+                      router.push({
+                        pathname: "/product-details",
+                        params: {
+                          id: item.id,
+                          name: item.name,
+                          price: item.price,
+                          weight: item.weight,
+                          icon: item.icon,
+                        },
+                      })
+                    }
                     style={{
                       backgroundColor: "#53B175",
                       width: 32,
@@ -375,7 +413,7 @@ export default function Home() {
                     <Text style={{ fontSize: 16, color: "#fff" }}>+</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         </View>
