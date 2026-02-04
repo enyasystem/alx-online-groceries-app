@@ -48,11 +48,17 @@ export default function SignIn() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 24, paddingBottom: 80 }}
-      >
-        {/* Hero Image */}
+      <View style={{ flex: 1, flexDirection: "column" }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            flexGrow: 1,
+            paddingHorizontal: 20,
+            paddingVertical: 24,
+            paddingBottom: 20,
+          }}
+        >
+          {/* Hero Image */}
         <View
           style={{
             width: "100%",
@@ -213,19 +219,21 @@ export default function SignIn() {
             Continue with Facebook
           </Text>
         </TouchableOpacity>
+        </ScrollView>
 
-        {/* Divider */}
+        {/* Login/Signup Links - Fixed Bottom */}
         <View
           style={{
-            height: 1,
-            backgroundColor: "#E2E2E2",
-            marginVertical: 24,
+            borderTopColor: "#E2E2E2",
+            borderTopWidth: 1,
+            paddingHorizontal: 20,
+            paddingVertical: 16,
+            paddingBottom: 24,
+            flexDirection: "row",
+            justifyContent: "center",
+            gap: 8,
+            backgroundColor: "#fff",
           }}
-        />
-
-        {/* Login/Signup Links */}
-        <View
-          style={{ flexDirection: "row", justifyContent: "center", gap: 8 }}
         >
           <TouchableOpacity onPress={() => router.push("/login")}>
             <Text
@@ -251,29 +259,28 @@ export default function SignIn() {
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
 
-      {/* Loading Bar */}
-      <View
-        style={{
-          height: 3,
-          backgroundColor: "#E2E2E2",
-          marginHorizontal: 40,
-          marginBottom: 20,
-          borderRadius: 2,
-        }}
-      />
-
-      {/* Country Picker Modal */}
-      <Modal
-        visible={showCountryModal}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setShowCountryModal(false)}
-      >
+        {/* Loading Bar */}
         <View
           style={{
-            flex: 1,
+            height: 3,
+            backgroundColor: "#E2E2E2",
+            marginHorizontal: 40,
+            marginBottom: 20,
+            borderRadius: 2,
+          }}
+        />
+
+        {/* Country Picker Modal */}
+        <Modal
+          visible={showCountryModal}
+          transparent={true}
+          animationType="fade"
+          onRequestClose={() => setShowCountryModal(false)}
+        >
+          <View
+            style={{
+              flex: 1,
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             justifyContent: "flex-end",
           }}
@@ -364,7 +371,8 @@ export default function SignIn() {
             />
           </View>
         </View>
-      </Modal>
+        </Modal>
+      </View>
     </SafeAreaView>
   );
 }

@@ -26,7 +26,12 @@ export default function Login() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 24, paddingBottom: 80 }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingHorizontal: 20,
+          paddingVertical: 24,
+          paddingBottom: 80,
+        }}
         keyboardShouldPersistTaps="handled"
       >
         {/* Carrot Icon */}

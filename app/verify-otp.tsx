@@ -46,7 +46,8 @@ export default function VerifyOTP() {
         <View
           style={{
             paddingHorizontal: 20,
-            paddingVertical: 16,
+            paddingVertical: 20,
+            paddingTop: 24,
             flexDirection: "row",
             alignItems: "center",
             borderBottomColor: "#F0F0F0",
@@ -64,7 +65,12 @@ export default function VerifyOTP() {
         {/* Content */}
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 32, paddingBottom: 80 }}
+          contentContainerStyle={{
+            flexGrow: 1,
+            paddingHorizontal: 20,
+            paddingVertical: 32,
+            paddingBottom: 80,
+          }}
           keyboardShouldPersistTaps="handled"
         >
           {/* Title */}
