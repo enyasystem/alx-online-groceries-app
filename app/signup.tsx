@@ -5,13 +5,14 @@ import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
-  TouchableOpacity,
   SafeAreaView,
   ScrollView,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Signup() {
   const router = useRouter();
@@ -42,12 +43,14 @@ export default function Signup() {
     setFormValid(ok);
   }, [isUsernameOk, isEmailOk, isPasswordOk]);
 
+  const insets = useSafeAreaInsets();
   // Compute button style once at component level so it updates on every render
   const signUpButtonStyle = {
     paddingVertical: 16,
     borderRadius: 19,
     alignItems: "center" as const,
-    marginBottom: 20,
+    // Keep a small fixed bottom margin; large insets should be handled on the ScrollView instead
+    marginBottom: 12,
     backgroundColor: formValid ? "#53B175" : "#CCCCCC",
   };
 
@@ -125,8 +128,9 @@ export default function Signup() {
           contentContainerStyle={{
             flexGrow: 1,
             paddingHorizontal: 20,
-            paddingVertical: 24,
-            paddingBottom: Platform.OS === "android" ? 40 : 160,
+            paddingVertical: 12,
+            // Add safe area bottom inset but cap it so very large insets don't push content off-screen
+            paddingBottom: Math.min(insets.bottom + (Platform.OS === "ios" ? 80 : 24), 80),
           }}
           keyboardShouldPersistTaps="handled"
         >
@@ -134,7 +138,7 @@ export default function Signup() {
           <View
             style={{
               alignItems: "center",
-              marginVertical: 32,
+              marginVertical: 16,
             }}
           >
             <Text style={{ fontSize: 64 }}>🥕</Text>
@@ -158,8 +162,8 @@ export default function Signup() {
             style={{
               fontSize: 14,
               color: "#7C7C7C",
-              marginBottom: 32,
-              lineHeight: 21,
+              marginBottom: 16,
+              lineHeight: 20,
             }}
           >
             Enter your credentials to continue
@@ -170,7 +174,7 @@ export default function Signup() {
             style={{
               fontSize: 12,
               color: "#7C7C7C",
-              marginBottom: 8,
+              marginBottom: 4,
               fontWeight: "500",
               letterSpacing: 0.5,
             }}
@@ -187,10 +191,10 @@ export default function Signup() {
             style={{
               fontSize: 16,
               color: "#181725",
-              paddingVertical: 12,
+              paddingVertical: 8,
               borderBottomColor: "#E2E2E2",
               borderBottomWidth: 2,
-              marginBottom: 28,
+              marginBottom: 12,
             }}
           />
           {touched.username && usernameError ? (
@@ -202,7 +206,7 @@ export default function Signup() {
           ) : null}
 
           {/* Username hint */}
-          <View style={{ marginBottom: 12 }}>
+          <View style={{ marginBottom: 8 }}>
             <Text
               style={{
                 fontSize: 12,
@@ -219,7 +223,7 @@ export default function Signup() {
             style={{
               fontSize: 12,
               color: "#7C7C7C",
-              marginBottom: 8,
+              marginBottom: 4,
               fontWeight: "500",
               letterSpacing: 0.5,
             }}
@@ -233,7 +237,7 @@ export default function Signup() {
               alignItems: "center",
               borderBottomColor: "#E2E2E2",
               borderBottomWidth: 2,
-              marginBottom: 28,
+              marginBottom: 16,
             }}
           >
             <TextInput
@@ -263,7 +267,7 @@ export default function Signup() {
           ) : null}
 
           {/* Email hint */}
-          <View style={{ marginBottom: 12 }}>
+          <View style={{ marginBottom: 8 }}>
             <Text
               style={{
                 fontSize: 12,
@@ -279,7 +283,7 @@ export default function Signup() {
             style={{
               fontSize: 12,
               color: "#7C7C7C",
-              marginBottom: 8,
+              marginBottom: 4,
               fontWeight: "500",
               letterSpacing: 0.5,
             }}
@@ -293,7 +297,7 @@ export default function Signup() {
               alignItems: "center",
               borderBottomColor: "#E2E2E2",
               borderBottomWidth: 2,
-              marginBottom: 32,
+              marginBottom: 16,
             }}
           >
             <TextInput
@@ -334,7 +338,7 @@ export default function Signup() {
           ) : null}
 
           {/* Password rule hints */}
-          <View style={{ marginBottom: 12 }}>
+          <View style={{ marginBottom: 8 }}>
             <Text
               style={{
                 fontSize: 12,
@@ -355,7 +359,7 @@ export default function Signup() {
           </View>
 
           {/* Terms */}
-          <View style={{ marginBottom: 32 }}>
+          <View style={{ marginBottom: 12 }}>
             <Text
               style={{
                 fontSize: 12,
@@ -404,14 +408,20 @@ export default function Signup() {
           </TouchableOpacity>
 
           {/* Form status indicator for debugging */}
-          <View style={{ alignItems: "center", marginBottom: 12 }}>
+          <View style={{ alignItems: "center", marginBottom: 8 }}>
             <Text style={{ color: formValid ? "#53B175" : "#9B9B9B" }}>
               {formValid ? "Ready to sign up" : "Complete fields to enable"}
             </Text>
           </View>
 
           {/* Login Link */}
-          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginBottom: 8,
+            }}
+          >
             <Text
               style={{
                 fontSize: 14,
