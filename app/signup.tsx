@@ -1,10 +1,11 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
   Pressable,
+  TouchableOpacity,
   SafeAreaView,
   ScrollView,
   Text,
@@ -27,20 +28,36 @@ export default function Signup() {
     email: false,
     password: false,
   });
+  const [formValid, setFormValid] = useState(false);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isUsernameOk = username.trim().length >= 3;
-  const isPasswordOk = password.length >= 8 && /\d/.test(password);
+  const isPasswordLenOk = password.length >= 8;
+  const isPasswordHasNumber = /\d/.test(password);
+  const isPasswordOk = isPasswordLenOk && isPasswordHasNumber;
   const isEmailOk = emailRegex.test(email);
 
-  const isFormValid = isUsernameOk && isEmailOk && isPasswordOk;
+  useEffect(() => {
+    const ok = isUsernameOk && isEmailOk && isPasswordOk;
+    setFormValid(ok);
+  }, [isUsernameOk, isEmailOk, isPasswordOk]);
+
+  // Compute button style once at component level so it updates on every render
+  const signUpButtonStyle = {
+    paddingVertical: 16,
+    borderRadius: 19,
+    alignItems: "center" as const,
+    marginBottom: 20,
+    backgroundColor: formValid ? "#53B175" : "#CCCCCC",
+  };
 
   const validateEmail = (text: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setEmail(text);
-    const valid = emailRegex.test(text);
+    const clean = text.trim();
+    setEmail(clean);
+    const valid = emailRegex.test(clean);
     setIsEmailValid(valid);
-    if (!text) setEmailError("Email is required");
+    if (!clean) setEmailError("Email is required");
     else setEmailError(valid ? null : "Enter a valid email");
   };
 
@@ -184,6 +201,19 @@ export default function Signup() {
             </Text>
           ) : null}
 
+          {/* Username hint */}
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 12,
+                color: isUsernameOk ? "#53B175" : "#9B9B9B",
+                marginBottom: 4,
+              }}
+            >
+              {isUsernameOk ? "✓" : "○"} At least 3 characters
+            </Text>
+          </View>
+
           {/* Email Field */}
           <Text
             style={{
@@ -231,6 +261,18 @@ export default function Signup() {
               {emailError}
             </Text>
           ) : null}
+
+          {/* Email hint */}
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 12,
+                color: isEmailOk ? "#53B175" : "#9B9B9B",
+              }}
+            >
+              {isEmailOk ? "✓" : "○"} Valid email address
+            </Text>
+          </View>
 
           {/* Password Field */}
           <Text
@@ -291,6 +333,27 @@ export default function Signup() {
             </Text>
           ) : null}
 
+          {/* Password rule hints */}
+          <View style={{ marginBottom: 12 }}>
+            <Text
+              style={{
+                fontSize: 12,
+                color: isPasswordLenOk ? "#53B175" : "#9B9B9B",
+                marginBottom: 4,
+              }}
+            >
+              {isPasswordLenOk ? "✓" : "○"} At least 8 characters
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                color: isPasswordHasNumber ? "#53B175" : "#9B9B9B",
+              }}
+            >
+              {isPasswordHasNumber ? "✓" : "○"} Includes a number
+            </Text>
+          </View>
+
           {/* Terms */}
           <View style={{ marginBottom: 32 }}>
             <Text
@@ -312,19 +375,22 @@ export default function Signup() {
           </View>
 
           {/* Sign Up Button */}
-          <Pressable
-            onPress={handleSignup}
-            disabled={!isFormValid}
-            accessibilityState={{ disabled: !isFormValid }}
-            android_ripple={{ color: "transparent" }}
-            style={{
-              paddingVertical: 16,
-              backgroundColor: isFormValid ? "#53B175" : "#CCCCCC",
-              borderRadius: 19,
-              alignItems: "center",
-              marginBottom: 20,
-              opacity: isFormValid ? 1 : 0.7,
+          <TouchableOpacity
+            onPress={() => {
+              if (!formValid) return;
+              handleSignup();
             }}
+            disabled={!formValid}
+            activeOpacity={0.85}
+            accessibilityRole="button"
+            accessibilityState={{ disabled: !formValid }}
+            style={[
+              signUpButtonStyle,
+              {
+                backgroundColor: formValid ? "#53B175" : "#CCCCCC",
+                opacity: formValid ? 1 : 0.85,
+              },
+            ]}
           >
             <Text
               style={{
@@ -335,7 +401,14 @@ export default function Signup() {
             >
               Sign Up
             </Text>
-          </Pressable>
+          </TouchableOpacity>
+
+          {/* Form status indicator for debugging */}
+          <View style={{ alignItems: "center", marginBottom: 12 }}>
+            <Text style={{ color: formValid ? "#53B175" : "#9B9B9B" }}>
+              {formValid ? "Ready to sign up" : "Complete fields to enable"}
+            </Text>
+          </View>
 
           {/* Login Link */}
           <View style={{ flexDirection: "row", justifyContent: "center" }}>

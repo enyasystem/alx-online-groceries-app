@@ -3,13 +3,13 @@ import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  FlatList,
-  Modal,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
+    FlatList,
+    Modal,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { useAuth } from "../src/context/AuthContext";
 
@@ -36,7 +36,7 @@ const AREA_TYPES = [
 export default function SelectLocation() {
   const router = useRouter();
   const route = useRoute();
-  const { user, signIn } = useAuth();
+  const { user } = useAuth();
   const [selectedZone, setSelectedZone] = useState(NIGERIAN_ZONES[0]);
   const [selectedArea, setSelectedArea] = useState<
     (typeof AREA_TYPES)[0] | null
@@ -86,7 +86,10 @@ export default function SelectLocation() {
 
       console.log("Prepared user with location:", updatedUser);
       // Navigate to loading screen which will persist the user and then redirect to tabs.
-      router.push({ pathname: "/loading", params: { userData: JSON.stringify(updatedUser) } });
+      router.push({
+        pathname: "/loading",
+        params: { userData: JSON.stringify(updatedUser) },
+      });
     } catch (error) {
       console.error("Error preparing location data:", error);
     }

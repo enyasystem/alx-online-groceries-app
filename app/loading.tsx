@@ -1,8 +1,8 @@
-import { ActivityIndicator } from "react-native";
-import { SafeAreaView, Text, View } from "react-native";
-import { useEffect } from "react";
+import { ActivityIndicator, SafeAreaView, Text, View } from "react-native";
+
 import { useRoute } from "@react-navigation/native";
 import { useRouter } from "expo-router";
+import { useEffect } from "react";
 import { useAuth } from "../src/context/AuthContext";
 
 export default function Loading() {
