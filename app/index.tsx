@@ -45,7 +45,7 @@ export default function SplashScreen() {
           paddingHorizontal: 20,
         }}
       >
-        {/* Logo + Carrot in Row */}
+        {/* Logo + Carrot in Row with Tagline under Nectar */}
         <View
           style={{
             flexDirection: "row",
@@ -54,34 +54,36 @@ export default function SplashScreen() {
           }}
         >
           {/* Carrot Icon */}
-          <Text style={{ fontSize: 52, color: "#fff", marginRight: 12 }}>
-            🥕
+          <Text style={{ fontSize: 32, color: "#fff", marginRight: 12 }}>
+            🍎
           </Text>
 
-          {/* Nectar Text */}
-          <Text
-            style={{
-              fontSize: 56,
-              fontWeight: "800",
-              color: "#fff",
-              letterSpacing: 1,
-            }}
-          >
-            nectar
-          </Text>
+          {/* Column with Nectar and Tagline directly beneath it */}
+          <View style={{ flexDirection: "column", alignItems: "center" }}>
+            <Text
+              style={{
+                fontSize: 56,
+                fontWeight: "800",
+                color: "#fff",
+                letterSpacing: 1,
+              }}
+            >
+              nectar
+            </Text>
+
+            <Text
+              style={{
+                fontSize: 13,
+                color: "#fff",
+                letterSpacing: 2.5,
+                opacity: 0.9,
+                marginTop: 6,
+              }}
+            >
+              online groceries
+            </Text>
+          </View>
         </View>
-
-        {/* Tagline */}
-        <Text
-          style={{
-            fontSize: 13,
-            color: "#fff",
-            letterSpacing: 2.5,
-            opacity: 0.9,
-          }}
-        >
-          online groceries
-        </Text>
       </View>
 
       {/* Loading Bar */}
