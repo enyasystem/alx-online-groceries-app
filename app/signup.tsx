@@ -17,15 +17,44 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [touched, setTouched] = useState({ username: false, email: false, password: false });
 
   const validateEmail = (text: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmail(text);
-    setIsEmailValid(emailRegex.test(text));
+    const valid = emailRegex.test(text);
+    setIsEmailValid(valid);
+    if (!text) setEmailError("Email is required");
+    else setEmailError(valid ? null : "Enter a valid email");
+  };
+
+  const validateUsername = (text: string) => {
+    setUsername(text);
+    if (!text.trim()) setUsernameError("Username is required");
+    else if (text.trim().length < 3) setUsernameError("Username must be at least 3 characters");
+    else setUsernameError(null);
+  };
+
+  const validatePassword = (text: string) => {
+    setPassword(text);
+    if (!text) setPasswordError("Password is required");
+    else if (text.length < 8) setPasswordError("Password must be at least 8 characters");
+    else if (!/\d/.test(text)) setPasswordError("Password must include at least one number");
+    else setPasswordError(null);
   };
 
   const handleSignup = () => {
-    if (username.trim() && email.trim() && password.trim() && isEmailValid) {
+    // reveal errors if user tries to submit
+    setTouched({ username: true, email: true, password: true });
+
+    const formIsValid =
+      !usernameError && !emailError && !passwordError &&
+      username.trim() && email.trim() && password.trim() && isEmailValid;
+
+    if (formIsValid) {
       router.push("/select-location");
     }
   };
@@ -94,7 +123,8 @@ export default function Signup() {
           placeholder="Username"
           placeholderTextColor="#CCCCCC"
           value={username}
-          onChangeText={setUsername}
+          onChangeText={validateUsername}
+          onBlur={() => setTouched((s) => ({ ...s, username: true }))}
           style={{
             fontSize: 16,
             color: "#181725",
@@ -104,6 +134,9 @@ export default function Signup() {
             marginBottom: 28,
           }}
         />
+        {touched.username && usernameError ? (
+          <Text style={{ color: "#FF4D4F", marginTop: -20, marginBottom: 24 }}>{usernameError}</Text>
+        ) : null}
 
         {/* Email Field */}
         <Text
@@ -131,7 +164,8 @@ export default function Signup() {
             placeholder="example@email.com"
             placeholderTextColor="#CCCCCC"
             value={email}
-            onChangeText={validateEmail}
+              onChangeText={validateEmail}
+              onBlur={() => setTouched((s) => ({ ...s, email: true }))}
             keyboardType="email-address"
             style={{
               flex: 1,
@@ -144,6 +178,9 @@ export default function Signup() {
             <MaterialIcons name="check" size={24} color="#53B175" />
           )}
         </View>
+          {touched.email && emailError ? (
+            <Text style={{ color: "#FF4D4F", marginTop: -20, marginBottom: 24 }}>{emailError}</Text>
+          ) : null}
 
         {/* Password Field */}
         <Text
@@ -171,7 +208,8 @@ export default function Signup() {
             placeholder="••••••••"
             placeholderTextColor="#CCCCCC"
             value={password}
-            onChangeText={setPassword}
+            onChangeText={validatePassword}
+            onBlur={() => setTouched((s) => ({ ...s, password: true }))}
             secureTextEntry={!showPassword}
             style={{
               flex: 1,
@@ -191,6 +229,9 @@ export default function Signup() {
             />
           </TouchableOpacity>
         </View>
+        {touched.password && passwordError ? (
+          <Text style={{ color: "#FF4D4F", marginTop: -20, marginBottom: 24 }}>{passwordError}</Text>
+        ) : null}
 
         {/* Terms */}
         <View style={{ marginBottom: 32 }}>
@@ -221,6 +262,7 @@ export default function Signup() {
             !password.trim() ||
             !isEmailValid
           }
+          accessibilityState={{ disabled: !username.trim() || !email.trim() || !password.trim() || !isEmailValid }}
           style={{
             paddingVertical: 16,
             backgroundColor:
@@ -230,6 +272,7 @@ export default function Signup() {
             borderRadius: 19,
             alignItems: "center",
             marginBottom: 20,
+            opacity: username.trim() && email.trim() && password.trim() && isEmailValid ? 1 : 0.7,
           }}
         >
           <Text
