@@ -28,6 +28,13 @@ export default function Signup() {
     password: false,
   });
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isUsernameOk = username.trim().length >= 3;
+  const isPasswordOk = password.length >= 8 && /\d/.test(password);
+  const isEmailOk = emailRegex.test(email);
+
+  const isFormValid = isUsernameOk && isEmailOk && isPasswordOk;
+
   const validateEmail = (text: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmail(text);
@@ -307,39 +314,16 @@ export default function Signup() {
           {/* Sign Up Button */}
           <Pressable
             onPress={handleSignup}
-            disabled={
-              !username.trim() ||
-              !email.trim() ||
-              !password.trim() ||
-              !isEmailValid
-            }
-            accessibilityState={{
-              disabled:
-                !username.trim() ||
-                !email.trim() ||
-                !password.trim() ||
-                !isEmailValid,
-            }}
+            disabled={!isFormValid}
+            accessibilityState={{ disabled: !isFormValid }}
             android_ripple={{ color: "transparent" }}
             style={{
               paddingVertical: 16,
-              backgroundColor:
-                username.trim() &&
-                email.trim() &&
-                password.trim() &&
-                isEmailValid
-                  ? "#53B175"
-                  : "#CCCCCC",
+              backgroundColor: isFormValid ? "#53B175" : "#CCCCCC",
               borderRadius: 19,
               alignItems: "center",
               marginBottom: 20,
-              opacity:
-                username.trim() &&
-                email.trim() &&
-                password.trim() &&
-                isEmailValid
-                  ? 1
-                  : 0.7,
+              opacity: isFormValid ? 1 : 0.7,
             }}
           >
             <Text
