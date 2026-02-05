@@ -91,7 +91,7 @@ export default function Signup() {
         </Text>
 
         <TextInput
-          placeholder="Afsar Hossen Shuvo"
+          placeholder="Username"
           placeholderTextColor="#CCCCCC"
           value={username}
           onChangeText={setUsername}
@@ -128,7 +128,7 @@ export default function Signup() {
           }}
         >
           <TextInput
-            placeholder="imshuvo97@gmail.com"
+            placeholder="example@email.com"
             placeholderTextColor="#CCCCCC"
             value={email}
             onChangeText={validateEmail}

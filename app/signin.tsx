@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform,
 } from "react-native";
 import { useAuth } from "../src/context/AuthContext";
 
@@ -260,7 +261,7 @@ export default function SignIn() {
             borderTopWidth: 1,
             paddingHorizontal: 20,
             paddingVertical: 16,
-            paddingBottom: 24,
+            paddingBottom: Platform.OS === "android" ? 40 : 24,
             flexDirection: "row",
             justifyContent: "center",
             gap: 8,
@@ -298,7 +299,7 @@ export default function SignIn() {
             height: 3,
             backgroundColor: "#E2E2E2",
             marginHorizontal: 40,
-            marginBottom: 20,
+            marginBottom: Platform.OS === "android" ? 36 : 20,
             borderRadius: 2,
           }}
         />

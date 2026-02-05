@@ -2,13 +2,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
-    Dimensions,
-    FlatList,
-    SafeAreaView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Dimensions,
+  FlatList,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import FavoriteBadge from "../src/components/FavoriteBadge";
 import FiltersModal from "../src/components/FiltersModal";
@@ -292,10 +292,10 @@ export default function SearchScreen() {
         pointerEvents="box-none"
       >
         <FavoriteBadge
-          productId={item.id}
+          productKey={`${item.category}-${item.id}`}
           productName={item.name}
           productDescription={item.details}
-          productPrice={parseInt(item.price as any) || 0}
+          productPrice={parseInt(String(item.price).replace(/\D/g, "")) || 0}
           productImage={item.icon}
         />
       </View>

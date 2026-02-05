@@ -83,7 +83,7 @@ export default function Login() {
         </Text>
 
         <TextInput
-          placeholder="imshuvo97@gmail.com"
+          placeholder="example@email.com"
           placeholderTextColor="#CCCCCC"
           value={email}
           onChangeText={setEmail}
