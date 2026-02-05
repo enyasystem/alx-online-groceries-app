@@ -9,11 +9,13 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 // FavoriteBadge intentionally omitted for category cards (categories aren't favoritable here)
 
 export default function Explore() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
+  const insets = useSafeAreaInsets();
 
   const categories = [
     {
@@ -87,7 +89,8 @@ export default function Explore() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: 100,
+          // Respect safe area but cap to ensure content sits above the tab bar + center button
+          paddingBottom: Math.min(insets.bottom + 80, 160),
           paddingVertical: 0,
           paddingTop: 0,
         }}

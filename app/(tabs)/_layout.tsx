@@ -1,8 +1,15 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
+  const insets = useSafeAreaInsets();
+  const baseTabHeight = 70; // visual height of the tab area
+  // Compute a conservative tab bottom so we can shift the tab bar down slightly while staying above system navigation
+  // Move the tab bar closer to the bottom (smaller value = lower on screen)
+  const tabBottom = Math.max(insets.bottom - 12, 0);
+
   return (
     <Tabs
       screenOptions={{
@@ -12,7 +19,8 @@ export default function TabsLayout() {
           backgroundColor: "#fff",
           borderTopColor: "#f5f5f5",
           borderTopWidth: 1,
-          height: 70,
+          // Keep the visual height consistent and position above system navigation with a small gap so rounded corners remain visible
+          height: baseTabHeight,
           paddingBottom: 10,
           paddingTop: 10,
           borderTopLeftRadius: 40,
@@ -27,9 +35,11 @@ export default function TabsLayout() {
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
           position: "absolute",
-          bottom: 0,
+          // position the tab bar a bit lower so it sits closer to system navigation
+          bottom: tabBottom,
           left: 0,
           right: 0,
+          overflow: "visible",
         },
         tabBarLabelPosition: "below-icon",
         headerShown: false,
@@ -81,7 +91,8 @@ export default function TabsLayout() {
             <View
               style={{
                 position: "absolute",
-                bottom: 12,
+                // position the floating button slightly lower to sit naturally over the tab curve
+                bottom: tabBottom + 6,
                 width: 68,
                 height: 68,
                 borderRadius: 34,

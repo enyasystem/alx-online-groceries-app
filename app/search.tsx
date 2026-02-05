@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import FavoriteBadge from "../src/components/FavoriteBadge";
 import FiltersModal from "../src/components/FiltersModal";
 import { useAuth } from "../src/context/AuthContext";
@@ -120,6 +121,7 @@ export default function SearchScreen() {
   const router = useRouter();
   const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
+  const insets = useSafeAreaInsets();
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [showFilters, setShowFilters] = useState(false);
   const [activeFilters, setActiveFilters] = useState<{
@@ -434,7 +436,8 @@ export default function SearchScreen() {
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: 100,
+          // Respect safe area but cap to ensure content sits above the tab bar + center button
+          paddingBottom: Math.min(insets.bottom + 100, 200),
         }}
         ListEmptyComponent={
           <View

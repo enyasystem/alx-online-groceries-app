@@ -127,8 +127,8 @@ export default function SelectLocation() {
             flexGrow: 1,
             paddingHorizontal: 20,
             paddingVertical: 32,
-            // Respect safe area but cap to keep footer visible
-            paddingBottom: Math.min(insets.bottom + 32, 80),
+            // Respect safe area but cap to keep footer visible above the tab bar + center button
+            paddingBottom: Math.min(insets.bottom + 96, 160),
           }}
           keyboardShouldPersistTaps="handled"
         >

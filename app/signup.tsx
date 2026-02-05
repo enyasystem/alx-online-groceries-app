@@ -129,10 +129,10 @@ export default function Signup() {
             flexGrow: 1,
             paddingHorizontal: 20,
             paddingVertical: 12,
-            // Add safe area bottom inset but cap it so very large insets don't push content off-screen
+            // Add safe area bottom inset so content (and Sign Up button) is visible above system navigation and the tab bar
             paddingBottom: Math.min(
-              insets.bottom + (Platform.OS === "ios" ? 80 : 24),
-              80,
+              insets.bottom + (Platform.OS === "ios" ? 120 : 80),
+              160,
             ),
           }}
           keyboardShouldPersistTaps="handled"
