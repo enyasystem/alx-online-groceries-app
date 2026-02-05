@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "../src/context/AuthContext";
 
 const NIGERIAN_ZONES = [
@@ -51,6 +52,7 @@ export default function SelectLocation() {
     ? JSON.parse(routeParams.userData)
     : null;
   const currentUser = contextUser || passedUser;
+  const insets = useSafeAreaInsets();
 
   const handleSelectZone = (zone: (typeof NIGERIAN_ZONES)[0]) => {
     setSelectedZone(zone);
@@ -125,7 +127,8 @@ export default function SelectLocation() {
             flexGrow: 1,
             paddingHorizontal: 20,
             paddingVertical: 32,
-            paddingBottom: 80,
+            // Respect safe area but cap to keep footer visible
+            paddingBottom: Math.min(insets.bottom + 32, 80),
           }}
           keyboardShouldPersistTaps="handled"
         >
@@ -251,16 +254,23 @@ export default function SelectLocation() {
         </ScrollView>
 
         {/* Submit Button */}
-        <View style={{ paddingHorizontal: 20, paddingBottom: 24 }}>
+        <View
+          style={{
+            paddingHorizontal: 20,
+            paddingBottom: Math.min(insets.bottom + 12, 64),
+          }}
+        >
           <TouchableOpacity
             onPress={handleSubmit}
             disabled={!selectedArea}
+            activeOpacity={0.85}
             style={{
               paddingVertical: 16,
               backgroundColor:
                 selectedArea && selectedZone ? "#53B175" : "#CCCCCC",
               borderRadius: 19,
               alignItems: "center",
+              opacity: selectedArea && selectedZone ? 1 : 0.85,
             }}
           >
             <Text

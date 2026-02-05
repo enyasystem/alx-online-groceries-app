@@ -130,7 +130,10 @@ export default function Signup() {
             paddingHorizontal: 20,
             paddingVertical: 12,
             // Add safe area bottom inset but cap it so very large insets don't push content off-screen
-            paddingBottom: Math.min(insets.bottom + (Platform.OS === "ios" ? 80 : 24), 80),
+            paddingBottom: Math.min(
+              insets.bottom + (Platform.OS === "ios" ? 80 : 24),
+              80,
+            ),
           }}
           keyboardShouldPersistTaps="handled"
         >
