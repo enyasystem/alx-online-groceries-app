@@ -9,6 +9,8 @@ export default function TabsLayout() {
   // Compute a conservative tab bottom so we can shift the tab bar down slightly while staying above system navigation
   // Move the tab bar closer to the bottom (smaller value = lower on screen)
   const tabBottom = Math.max(insets.bottom - 12, 0);
+  // Slightly lower the center add button while keeping it above system nav
+  const cartButtonBottom = Math.max(tabBottom - 8, 4);
 
   return (
     <Tabs
@@ -91,8 +93,8 @@ export default function TabsLayout() {
             <View
               style={{
                 position: "absolute",
-                // position the floating button slightly lower to sit naturally over the tab curve
-                bottom: tabBottom + 6,
+                // position the floating button lower so it sits closer to the tab curve
+                bottom: cartButtonBottom,
                 width: 68,
                 height: 68,
                 borderRadius: 34,
