@@ -54,7 +54,7 @@ export default function SplashScreen() {
           }}
         >
           {/* Carrot Icon */}
-          <Text style={{ fontSize: 32, color: "#fff", marginRight: 12 }}>
+          <Text style={{ fontSize: 44, color: "#fff", marginRight: 8 }}>
             🍎
           </Text>
 
@@ -77,7 +77,7 @@ export default function SplashScreen() {
                 color: "#fff",
                 letterSpacing: 2.5,
                 opacity: 0.9,
-                marginTop: 3,
+                marginTop: 4,
               }}
             >
               online groceries
