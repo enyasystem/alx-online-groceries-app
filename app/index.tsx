@@ -59,7 +59,7 @@ export default function SplashScreen() {
           </Text>
 
           {/* Column with Nectar and Tagline directly beneath it */}
-          <View style={{ flexDirection: "column", alignItems: "center" }}>
+          <View style={{ flexDirection: "column", alignItems: "flex-start" }}>
             <Text
               style={{
                 fontSize: 56,
@@ -77,7 +77,7 @@ export default function SplashScreen() {
                 color: "#fff",
                 letterSpacing: 2.5,
                 opacity: 0.9,
-                marginTop: 6,
+                marginTop: 3,
               }}
             >
               online groceries
