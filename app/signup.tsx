@@ -55,7 +55,7 @@ export default function Signup() {
     else setPasswordError(null);
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     // reveal errors if user tries to submit
     setTouched({ username: true, email: true, password: true });
 
@@ -68,8 +68,24 @@ export default function Signup() {
       password.trim() &&
       isEmailValid;
 
-    if (formIsValid) {
-      router.push("/select-location");
+    if (!formIsValid) return;
+
+    const userData = {
+      id: Date.now().toString(),
+      name: username.trim(),
+      email: email.trim(),
+      phone: "",
+      location: "",
+    };
+
+    // Don't persist user yet — send to select-location so they can pick a location first.
+    try {
+      router.push({
+        pathname: "/select-location",
+        params: { userData: JSON.stringify(userData) },
+      });
+    } catch (e) {
+      console.error("Navigation to select-location failed:", e);
     }
   };
 
@@ -80,13 +96,13 @@ export default function Signup() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
       >
-          <ScrollView
+        <ScrollView
           style={{ flex: 1 }}
           contentContainerStyle={{
             flexGrow: 1,
             paddingHorizontal: 20,
             paddingVertical: 24,
-              paddingBottom: Platform.OS === "android" ? 40 : 160,
+            paddingBottom: Platform.OS === "android" ? 40 : 160,
           }}
           keyboardShouldPersistTaps="handled"
         >
