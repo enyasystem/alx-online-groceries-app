@@ -84,12 +84,11 @@ export default function SelectLocation() {
 
       updatedUser.location = `${selectedZone.name}, ${selectedArea.name}`;
 
-      console.log("Updating user with location:", updatedUser);
-      await signIn(updatedUser);
-      console.log("User updated, navigating to tabs");
-      router.replace("/(tabs)");
+      console.log("Prepared user with location:", updatedUser);
+      // Navigate to loading screen which will persist the user and then redirect to tabs.
+      router.push({ pathname: "/loading", params: { userData: JSON.stringify(updatedUser) } });
     } catch (error) {
-      console.error("Error updating location:", error);
+      console.error("Error preparing location data:", error);
     }
   };
 

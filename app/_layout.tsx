@@ -46,6 +46,7 @@ function RootLayoutNav() {
       <Stack.Screen name="verify-phone" />
       <Stack.Screen name="verify-otp" />
       <Stack.Screen name="select-location" />
+      <Stack.Screen name="loading" />
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="product-details" />
       <Stack.Screen name="category-products" />
