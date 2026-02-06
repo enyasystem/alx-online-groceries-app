@@ -14,11 +14,14 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CheckoutCard from "../../src/components/CheckoutCard";
 import { useCart } from "../../src/context/CartContext";
 
 export default function Cart() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
+  const baseTabHeight = 70;
   const [showCheckout, setShowCheckout] = useState(false);
   const { items, removeItem, updateQuantity, getTotalPrice } = useCart();
 
@@ -122,7 +125,13 @@ export default function Cart() {
 
         {/* Checkout Section */}
         <View
-          style={{ borderTopColor: "#E2E2E2", borderTopWidth: 1, padding: 20 }}
+          style={{
+            borderTopColor: "#E2E2E2",
+            borderTopWidth: 1,
+            paddingHorizontal: 20,
+            paddingTop: 20,
+            paddingBottom: insets.bottom + 140,
+          }}
         >
           <View
             style={{
@@ -176,7 +185,7 @@ export default function Cart() {
         }}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: 120,
+          paddingBottom: Math.min(insets.bottom + baseTabHeight + 60, 160),
         }}
       >
         <Text
@@ -315,7 +324,7 @@ export default function Cart() {
           borderTopColor: "#E2E2E2",
           borderTopWidth: 1,
           padding: 20,
-          paddingBottom: 160,
+          paddingBottom: Math.min(insets.bottom + baseTabHeight + 60, 120),
         }}
       >
         <View
