@@ -176,7 +176,7 @@ export default function Account() {
             flexDirection: "row",
             justifyContent: "center",
             marginTop: 24,
-            marginBottom: Math.min(insets.bottom + baseTabHeight + 40, 120),
+            marginBottom: Math.min(insets.bottom + baseTabHeight + 100, 180),
           }}
         >
           <MaterialCommunityIcons
