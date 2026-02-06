@@ -1,17 +1,20 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import {
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "../../src/context/AuthContext";
 
 export default function Account() {
   const router = useRouter();
   const { user, logout } = useAuth();
+  const insets = useSafeAreaInsets();
+  const baseTabHeight = 70; // should match tab bar visual height
 
   const handleLogout = async () => {
     try {
@@ -26,11 +29,12 @@ export default function Account() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{
-          flex: 1,
+        style={{ flex: 1 }}
+        contentContainerStyle={{
           paddingHorizontal: 20,
           paddingVertical: 24,
           paddingTop: 32,
+          paddingBottom: 20,
         }}
       >
         <Text
@@ -159,17 +163,25 @@ export default function Account() {
             />
           </TouchableOpacity>
         ))}
+      </ScrollView>
 
-        {/* Log Out (styled pill) */}
+      {/* Non-floating Log Out button - fixed at bottom, not scrollable */}
+      <View
+        style={{
+          paddingHorizontal: 20,
+          paddingBottom: Math.min(insets.bottom + baseTabHeight + 40, 120),
+          paddingTop: 16,
+          backgroundColor: "#fff",
+        }}
+      >
         <TouchableOpacity
           onPress={handleLogout}
+          activeOpacity={0.85}
           style={{
             backgroundColor: "#F2F7F3",
-            paddingVertical: 18,
+            paddingVertical: 16,
             borderRadius: 28,
             alignItems: "center",
-            marginTop: 20,
-            marginBottom: 40,
             flexDirection: "row",
             justifyContent: "center",
           }}
@@ -184,7 +196,7 @@ export default function Account() {
             Log Out
           </Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
