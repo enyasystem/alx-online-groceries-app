@@ -150,13 +150,13 @@ Using Tailwind's 4px base spacing scale (0.5, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 2
 
 ## Demo & Submission
 
-### Demo Video
-[Link to demo video]
+<!-- ### Demo Video -->
+
 
 ### Social Media Posts
-- LinkedIn: [Link]
-- Twitter/X: [Link]
-- Instagram: [Link]
+- LinkedIn: [https://www.linkedin.com/posts/enyaelvis_reactnative-mobiledevelopment-expo-ugcPost-7425559643680325632-6OPU?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFrNpEcBXGtkeapZA4HgwV7SZ1BkfxbSiHs]
+- Twitter/X: [x.com/enyasystem]
+- Instagram: [instagram.com/enyaelvis]
 
 ### Submission Links
 - GitHub Repository: https://github.com/yourusername/alx-online-groceries-app
@@ -216,17 +216,17 @@ eas build --platform android
 - **Animations:** React Native Reanimated
 
 ## Credits
-- **Design:** [Designer Name/Link from Figma]
-- **Development:** [Your Name]
+- **Design:** [Afsar Hossen https://www.figma.com/design/FbIovZFuJAJ5Xo4gyTTBQj/Online-Groceries-App-UI--Community-?node-id=1-2&p=f]
+- **Development:** Enya Elvis
 - **Challenge:** ALX Software Engineering Program
 
 ## License
 This project is created for educational purposes as part of the ALX Software Engineering Program.
 
 ## Contact
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+- GitHub: [@enyasystem](https://github.com/enyasystem)
+- LinkedIn: [Enya Elvis](https://linkedin.com/in/enyasystem)
+- Email: enyaelvis@gmail.com
 
 ---
 
