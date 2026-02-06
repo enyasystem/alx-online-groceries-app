@@ -13,31 +13,31 @@ export default function Onboarding() {
   };
 
   return (
-    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView edges={["top", "bottom"]} style={{ flex: 1, backgroundColor: "#fff" }}>
       <View
         style={{
           flex: 1,
           justifyContent: "flex-start",
           alignItems: "center",
           paddingHorizontal: 20,
-          paddingBottom: 40,
+          paddingBottom: insets.bottom + 24,
         }}
       >
         {/* Stacked Hero Images (reusing existing photo) */}
         <View
           style={{
             width: "100%",
-            height: 340,
+            height: 300,
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: 20,
-            marginTop: insets.top + 200,
+            marginBottom: 12,
+            marginTop: insets.top + 24,
           }}
         >
           <View
             style={{
               width: "86%",
-              height: 320,
+              height: 260,
               alignItems: "center",
               justifyContent: "center",
               overflow: "visible",
@@ -139,7 +139,7 @@ export default function Onboarding() {
 
         {/* Content */}
         <View
-          style={{ alignItems: "center", marginTop: "auto", marginBottom: 40 }}
+          style={{ alignItems: "center", marginTop: 24, marginBottom: 24 }}
         >
           <Text
             style={{
