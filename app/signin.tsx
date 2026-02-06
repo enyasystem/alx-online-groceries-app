@@ -300,6 +300,7 @@ export default function SignIn() {
                 fontSize: 14,
                 fontWeight: "600",
                 color: "#53B175",
+                textAlign: "center",
               }}
             >
               Sign Up

@@ -52,9 +52,10 @@ export default function Login() {
             color: "#181725",
             marginBottom: 8,
             lineHeight: 36,
+            textAlign: "center",
           }}
         >
-          Loging
+          Login
         </Text>
 
         {/* Subtitle */}

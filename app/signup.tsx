@@ -155,6 +155,7 @@ export default function Signup() {
               color: "#181725",
               marginBottom: 8,
               lineHeight: 36,
+              textAlign: "center",
             }}
           >
             Sign Up
