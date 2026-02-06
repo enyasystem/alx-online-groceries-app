@@ -275,8 +275,9 @@ export default function Cart() {
         style={{
           borderTopColor: "#E2E2E2",
           borderTopWidth: 1,
-          padding: 20,
-          paddingBottom: Math.min(insets.bottom + baseTabHeight + 60, 120),
+          paddingHorizontal: 20,
+          paddingTop: 20,
+          paddingBottom: insets.bottom + 140,
         }}
       >
         <View
