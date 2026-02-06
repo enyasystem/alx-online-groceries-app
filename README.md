@@ -160,7 +160,6 @@ Using Tailwind's 4px base spacing scale (0.5, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 2
 
 ### Submission Links
 - GitHub Repository: https://github.com/yourusername/alx-online-groceries-app
-- Social Media Post: [Your Post URL]
 
 ## Documentation
 For detailed documentation, see:
