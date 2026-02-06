@@ -2,16 +2,19 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    FlatList,
-    Image,
-    Modal,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  Image,
+  Modal,
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { useAuth } from "../src/context/AuthContext";
 
 const COUNTRIES = [
@@ -33,6 +36,7 @@ export default function SignIn() {
   const [phoneNumber] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
   const [showCountryModal, setShowCountryModal] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const handleGoogleSignIn = async () => {
     // Handle Google sign in - save session
@@ -80,7 +84,7 @@ export default function SignIn() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={{ flex: 1, flexDirection: "column" }}>
         <ScrollView
           style={{ flex: 1 }}
@@ -88,18 +92,25 @@ export default function SignIn() {
             flexGrow: 1,
             paddingHorizontal: 20,
             paddingVertical: 24,
-            paddingBottom: 20,
+            paddingBottom: Platform.OS === "android" ? 220 : 180,
+            paddingTop: insets.top + 24,
           }}
         >
           {/* Hero Image */}
           <View
             style={{
-              width: "100%",
-              height: 250,
+              width: "92%",
+              alignSelf: "center",
+              height: 220,
               borderRadius: 24,
               overflow: "hidden",
-              marginBottom: 32,
-              backgroundColor: "#f0f0f0",
+              marginBottom: 20,
+              backgroundColor: "#fff",
+              elevation: 6,
+              shadowColor: "#000",
+              shadowOpacity: 0.08,
+              shadowRadius: 12,
+              shadowOffset: { width: 0, height: 6 },
             }}
           >
             <Image
@@ -115,11 +126,14 @@ export default function SignIn() {
           {/* Headline */}
           <Text
             style={{
-              fontSize: 32,
+              fontSize: 28,
               fontWeight: "800",
               color: "#181725",
-              marginBottom: 32,
-              lineHeight: 40,
+              marginBottom: 20,
+              lineHeight: 36,
+              textAlign: "center",
+              width: "86%",
+              alignSelf: "center",
             }}
           >
             Get your groceries{"\n"}with ALX Store
@@ -206,18 +220,18 @@ export default function SignIn() {
             onPress={handleGoogleSignIn}
             style={{
               backgroundColor: "#5B9DF9",
-              paddingVertical: 16,
-              borderRadius: 28,
+              paddingVertical: 12,
+              borderRadius: 24,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              marginBottom: 16,
+              marginBottom: 12,
             }}
           >
-            <Text style={{ fontSize: 20, marginRight: 12 }}>G</Text>
+            <Text style={{ fontSize: 18, marginRight: 10 }}>G</Text>
             <Text
               style={{
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: "600",
                 color: "#fff",
               }}
@@ -231,20 +245,20 @@ export default function SignIn() {
             onPress={handleFacebookSignIn}
             style={{
               backgroundColor: "#2D5AA3",
-              paddingVertical: 16,
-              borderRadius: 28,
+              paddingVertical: 12,
+              borderRadius: 24,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              marginBottom: 24,
+              marginBottom: 12,
             }}
           >
-            <Text style={{ fontSize: 20, marginRight: 12, color: "#fff" }}>
+            <Text style={{ fontSize: 18, marginRight: 10, color: "#fff" }}>
               f
             </Text>
             <Text
               style={{
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: "600",
                 color: "#fff",
               }}

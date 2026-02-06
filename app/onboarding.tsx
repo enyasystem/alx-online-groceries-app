@@ -1,38 +1,37 @@
 import { useRouter } from "expo-router";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
-    Image,
-    SafeAreaView,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 export default function Onboarding() {
   const router = useRouter();
-
+  const insets = useSafeAreaInsets();
   const handleGetStarted = () => {
     router.push("/signin");
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: "#fff" }}>
       <View
         style={{
           flex: 1,
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           alignItems: "center",
           paddingHorizontal: 20,
-          paddingVertical: 40,
+          paddingBottom: 40,
         }}
       >
         {/* Stacked Hero Images (reusing existing photo) */}
         <View
           style={{
-            flex: 1.3,
             width: "100%",
+            height: 340,
             alignItems: "center",
             justifyContent: "center",
             marginBottom: 20,
+            marginTop: insets.top + 200,
           }}
         >
           <View
@@ -139,7 +138,9 @@ export default function Onboarding() {
         </View>
 
         {/* Content */}
-        <View style={{ alignItems: "center", marginBottom: 40 }}>
+        <View
+          style={{ alignItems: "center", marginTop: "auto", marginBottom: 40 }}
+        >
           <Text
             style={{
               fontSize: 28,
