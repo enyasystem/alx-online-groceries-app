@@ -8,12 +8,15 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import FavoriteBadge from "../src/components/FavoriteBadge";
 import { useCart } from "../src/context/CartContext";
 import { useFavorites } from "../src/context/FavoritesContext";
 
 export default function ProductDetails() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
+  const baseTabHeight = 70;
   const params = useLocalSearchParams();
   const { addItem } = useCart();
   const { addFavorite, removeFavorite } = useFavorites();
@@ -110,7 +113,9 @@ export default function ProductDetails() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={{
+          paddingBottom: Math.min(insets.bottom + baseTabHeight + 80, 180),
+        }}
       >
         {/* Header */}
         <View
@@ -377,14 +382,10 @@ export default function ProductDetails() {
       {/* Bottom Action Bar */}
       <View
         style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
           backgroundColor: "#fff",
           paddingHorizontal: 20,
-          paddingVertical: 16,
-          paddingBottom: 24,
+          paddingTop: 16,
+          paddingBottom: insets.bottom + 60,
           borderTopColor: "#f5f5f5",
           borderTopWidth: 1,
           flexDirection: "row",

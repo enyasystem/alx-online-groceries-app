@@ -7,11 +7,14 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useCart } from "../../src/context/CartContext";
 import { useFavorites } from "../../src/context/FavoritesContext";
 
 export default function Favorites() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
+  const baseTabHeight = 70;
   const { favorites, removeFavorite } = useFavorites();
   const { addItem } = useCart();
 
@@ -103,7 +106,7 @@ export default function Favorites() {
         }}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: 120,
+          paddingBottom: Math.min(insets.bottom + baseTabHeight + 60, 160),
         }}
       >
         <Text
@@ -196,8 +199,9 @@ export default function Favorites() {
         style={{
           borderTopColor: "#E2E2E2",
           borderTopWidth: 1,
-          padding: 20,
-          paddingBottom: 160,
+          paddingHorizontal: 20,
+          paddingTop: 20,
+          paddingBottom: insets.bottom + 60,
         }}
       >
         <TouchableOpacity
