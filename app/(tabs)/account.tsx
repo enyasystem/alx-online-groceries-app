@@ -163,17 +163,8 @@ export default function Account() {
             />
           </TouchableOpacity>
         ))}
-      </ScrollView>
 
-      {/* Non-floating Log Out button - fixed at bottom, not scrollable */}
-      <View
-        style={{
-          paddingHorizontal: 20,
-          paddingBottom: Math.min(insets.bottom + baseTabHeight + 40, 120),
-          paddingTop: 16,
-          backgroundColor: "#fff",
-        }}
-      >
+        {/* Log Out button - scrollable, part of menu items */}
         <TouchableOpacity
           onPress={handleLogout}
           activeOpacity={0.85}
@@ -184,6 +175,8 @@ export default function Account() {
             alignItems: "center",
             flexDirection: "row",
             justifyContent: "center",
+            marginTop: 24,
+            marginBottom: Math.min(insets.bottom + baseTabHeight + 40, 120),
           }}
         >
           <MaterialCommunityIcons
@@ -196,7 +189,7 @@ export default function Account() {
             Log Out
           </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
