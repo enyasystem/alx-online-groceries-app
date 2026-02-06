@@ -122,54 +122,6 @@ export default function Cart() {
             </TouchableOpacity>
           </View>
         </ScrollView>
-
-        {/* Checkout Section */}
-        <View
-          style={{
-            borderTopColor: "#E2E2E2",
-            borderTopWidth: 1,
-            paddingHorizontal: 20,
-            paddingTop: 20,
-            paddingBottom: insets.bottom + 140,
-          }}
-        >
-          <View
-            style={{
-              marginBottom: 12,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={{ fontSize: 16, color: "#7C7C7C" }}>Subtotal</Text>
-            <Text style={{ fontSize: 16, fontWeight: "600", color: "#181725" }}>
-              ₦{(0).toLocaleString()}
-            </Text>
-          </View>
-          <View
-            style={{
-              marginBottom: 16,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={{ fontSize: 16, color: "#7C7C7C" }}>Delivery</Text>
-            <Text style={{ fontSize: 16, fontWeight: "600", color: "#181725" }}>
-              ₦{delivery.toLocaleString()}
-            </Text>
-          </View>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#53B175",
-              paddingVertical: 16,
-              borderRadius: 12,
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-              Checkout
-            </Text>
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     );
   }
