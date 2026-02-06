@@ -201,7 +201,7 @@ export default function Favorites() {
           borderTopWidth: 1,
           paddingHorizontal: 20,
           paddingTop: 20,
-          paddingBottom: insets.bottom + 60,
+          paddingBottom: insets.bottom + 140,
         }}
       >
         <TouchableOpacity
