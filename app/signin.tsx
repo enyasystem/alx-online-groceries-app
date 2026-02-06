@@ -122,7 +122,7 @@ export default function SignIn() {
               lineHeight: 40,
             }}
           >
-            Get your groceries{"\n"}with nectar
+            Get your groceries{"\n"}with ALX Store
           </Text>
 
           {/* Phone Number Input */}

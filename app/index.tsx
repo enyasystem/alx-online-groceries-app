@@ -68,7 +68,7 @@ export default function SplashScreen() {
                 letterSpacing: 1,
               }}
             >
-              nectar
+              ALX
             </Text>
 
             <Text

@@ -171,7 +171,7 @@ export default function Home() {
         }}
       >
         <Text style={{ fontSize: 24, fontWeight: "800", color: "#53B175" }}>
-          🛒 Nectar
+          🛒 ALX
         </Text>
       </View>
 
