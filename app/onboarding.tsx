@@ -13,7 +13,10 @@ export default function Onboarding() {
   };
 
   return (
-    <SafeAreaView edges={["top", "bottom"]} style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView
+      edges={["top", "bottom"]}
+      style={{ flex: 1, backgroundColor: "#fff" }}
+    >
       <View
         style={{
           flex: 1,
@@ -138,9 +141,7 @@ export default function Onboarding() {
         </View>
 
         {/* Content */}
-        <View
-          style={{ alignItems: "center", marginTop: 24, marginBottom: 24 }}
-        >
+        <View style={{ alignItems: "center", marginTop: 24, marginBottom: 24 }}>
           <Text
             style={{
               fontSize: 28,
